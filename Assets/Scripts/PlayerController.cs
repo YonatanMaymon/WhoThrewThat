@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     private InputAction clickAction;
     private float zDistance;
 
-    void Start() {
+    void Start()
+    {
         clickAction = InputSystem.actions.FindAction("Click");
         // the distance of the player from the camera in the z axis
         // (needed to calculate the mouse location)
@@ -16,13 +17,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        mousePos.x = Mathf.Clamp(mousePos.x, 0, Screen.width);
+        mousePos.y = Mathf.Clamp(mousePos.y, 0, Screen.height);
+
 
         // Convert to world space
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(
-            new Vector3(mouseScreenPos.x, mouseScreenPos.y, zDistance)
+            new Vector3(mousePos.x, mousePos.y, zDistance)
         );
         transform.position = Vector3.Lerp(transform.position, mouseWorldPos, speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Rodent")) { }
+        if (other.gameObject.CompareTag("Snake")) { }
+        Destroy(other.gameObject);
     }
 
 
