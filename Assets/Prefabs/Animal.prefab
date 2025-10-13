@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 6612524616897582841}
   - component: {fileID: 2536051119163738512}
   m_Layer: 0
-  m_Name: Rodent 1
-  m_TagString: Rodent
+  m_Name: Animal
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

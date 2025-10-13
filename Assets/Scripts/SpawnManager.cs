@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject[] rodentPrefabs;
+    public GameObject[] animalsPrefabs;
     public GameObject snakePrefab;
     public float snakeSpawnPercent = 20;
 
@@ -28,25 +28,25 @@ public class SpawnManager : MonoBehaviour
 
     }
     /// <summary>
-    /// spawn either a snake or a rodent based on snakeSpawnPercent
+    /// spawn either a snake or a animal based on snakeSpawnPercent
     /// </summary>
-    void SpawnAnimal()
+    void Spawn()
     {
         // isSnake chance to be  true is exactly snakeSpawnPercent
         bool isSnake = snakeSpawnPercent >= Random.Range(0f, 100f);
         if (isSnake)
             SpawnSnake();
         else
-            SpawnRodent();
+            SpawnAnimal();
     }
     void SpawnSnake()
     {
         Instantiate(snakePrefab, GenerateRandomSpawnPoint(), snakePrefab.transform.rotation);
     }
-    void SpawnRodent()
+    void SpawnAnimal()
     {
-        GameObject rodentPrefab = rodentPrefabs[Random.Range(0, rodentPrefabs.Length)];
-        Instantiate(rodentPrefab, GenerateRandomSpawnPoint(), rodentPrefab.transform.rotation);
+        GameObject animalPrefab = animalsPrefabs[Random.Range(0, animalsPrefabs.Length)];
+        Instantiate(animalPrefab, GenerateRandomSpawnPoint(), animalPrefab.transform.rotation);
     }
 
     Vector3 GenerateRandomSpawnPoint()
@@ -54,6 +54,7 @@ public class SpawnManager : MonoBehaviour
         float x = Random.Range(-spawnReach, spawnReach);
         return new Vector3(x, spawnHight, 0);
     }
+
     //------------------------------------SpawnLoop------------------------------------
     void StartSpawnLoop()
     {
@@ -71,7 +72,7 @@ public class SpawnManager : MonoBehaviour
         float spawnRate = startSpawnRate;
         while (spawnLoopRunning)
         {
-            SpawnAnimal();
+            Spawn();
             float spawnInterval = 1 / spawnRate;
             yield return new WaitForSeconds(spawnInterval);
             // adjust spawnRate based on spawnIncreaseRate

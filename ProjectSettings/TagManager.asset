@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Snake
-  - Rodent
+  - Animal
+  - Ground
   layers:
   - Default
   - TransparentFX
