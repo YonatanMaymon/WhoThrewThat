@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject[] animalsPrefabs;
-    public GameObject snakePrefab;
-    public float snakeSpawnPercent = 20;
+    public GameObject[] origamiPrefabs;
+    public GameObject scissorsPrefab;
+    public float scissorsSpawnPercent = 20;
 
     [Tooltip("starting spawn rate per second")]
     public float startSpawnRate = 0.5f;
@@ -23,30 +23,26 @@ public class SpawnManager : MonoBehaviour
         StartSpawnLoop();
     }
 
-    void Update()
-    {
-
-    }
     /// <summary>
-    /// spawn either a snake or a animal based on snakeSpawnPercent
+    /// spawn either scissors or origami based on scissorsSpawnPercent
     /// </summary>
     void Spawn()
     {
-        // isSnake chance to be  true is exactly snakeSpawnPercent
-        bool isSnake = snakeSpawnPercent >= Random.Range(0f, 100f);
-        if (isSnake)
-            SpawnSnake();
+        // isScissors chance to be  true is exactly scissorsSpawnPercent
+        bool isScissors = scissorsSpawnPercent >= Random.Range(0f, 100f);
+        if (isScissors)
+            SpawnScissors();
         else
-            SpawnAnimal();
+            SpawnOrigami();
     }
-    void SpawnSnake()
+    void SpawnScissors()
     {
-        Instantiate(snakePrefab, GenerateRandomSpawnPoint(), snakePrefab.transform.rotation);
+        Instantiate(scissorsPrefab, GenerateRandomSpawnPoint(), scissorsPrefab.transform.rotation);
     }
-    void SpawnAnimal()
+    void SpawnOrigami()
     {
-        GameObject animalPrefab = animalsPrefabs[Random.Range(0, animalsPrefabs.Length)];
-        Instantiate(animalPrefab, GenerateRandomSpawnPoint(), animalPrefab.transform.rotation);
+        GameObject origamiPrefab = origamiPrefabs[Random.Range(0, origamiPrefabs.Length)];
+        Instantiate(origamiPrefab, GenerateRandomSpawnPoint(), origamiPrefab.transform.rotation);
     }
 
     Vector3 GenerateRandomSpawnPoint()

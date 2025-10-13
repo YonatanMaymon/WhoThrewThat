@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Animal")) { }
-        else if (other.gameObject.CompareTag("Snake")) { }
+        if (other.gameObject.CompareTag("Origami")) { }
+        else if (other.gameObject.CompareTag("Scissors")) { }
         else return;
         Destroy(other.gameObject);
     }
