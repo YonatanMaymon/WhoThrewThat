@@ -39,12 +39,11 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         Vector3 LeftDown = Util.GetWorldSpacePos(0, 0);
         Vector3 RightUp = Util.GetWorldSpacePos(Screen.width, Screen.height);
         float x = Mathf.Clamp(transform.position.x, LeftDown.x, RightUp.x);
-        float y = Mathf.Clamp(transform.position.y, LeftDown.y, RightUp.y);
         if (x != transform.position.x)
             Rb.linearVelocity = new Vector3(0, Rb.linearVelocity.y, 0);
-        if (y != transform.position.y)
+        if (transform.position.y >= RightUp.y)
             Rb.linearVelocity = new Vector3(Rb.linearVelocity.x, 0, 0);
-        transform.position = new Vector3(x, y, transform.position.z);
+        transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }
     private void MoveOnDrag()
     {

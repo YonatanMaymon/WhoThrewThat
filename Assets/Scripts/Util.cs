@@ -2,13 +2,32 @@ using UnityEngine;
 
 public static class Util
 {
-    private static float Z_VAL = 0f;
+    private static float Z_VAL = -0.9f;
 
+    /// <summary>
+    /// Converts screen space coordinates to world space coordinates using a plane
+    /// defined at a specific Z-value in world space.
+    /// </summary>
+    /// <param name="x">The x-coordinate in screen space.</param>
+    /// <param name="y">The y-coordinate in screen space.</param>
+    /// <returns>
+    /// A <see cref="Vector3"/> representing the world space position corresponding
+    /// to the given screen space coordinates. Returns <see cref="Vector3.zero"/> if
+    /// the ray does not intersect the plane.
+    /// </returns>
     public static Vector3 GetWorldSpacePos(float x, float y)
     {
-        float zDistance = Mathf.Abs(Camera.main.transform.position.z - Z_VAL);
-        return Camera.main.ScreenToWorldPoint(new Vector3(x, y, zDistance));
+        // Use the camera's forward direction to calculate the plane distance
+        Plane plane = new Plane(Vector3.forward, new Vector3(0, 0, Z_VAL));
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y, 0));
+
+        if (plane.Raycast(ray, out float distance))
+            return ray.GetPoint(distance);
+
+        // Fallback in case the ray doesn't hit the plane
+        return Vector3.zero;
     }
+
     /// <summary>
     /// generates random spawn point above screen
     /// </summary>
