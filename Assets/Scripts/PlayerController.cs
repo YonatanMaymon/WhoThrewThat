@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +10,8 @@ using UnityEngine.InputSystem;
 */
 public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public static event Action onScissorsCatch;
+    public static event Action<int> onOrigamiCatch;
     public float force = 10f;
     public float holdTime = 0.2f;
     private Rigidbody Rb;
@@ -33,8 +36,8 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     private void KeepOnScreen()
     {
-        Vector3 LeftDown = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, zDistance));
-        Vector3 RightUp = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, zDistance));
+        Vector3 LeftDown = Util.GetWorldSpacePos(0, 0);
+        Vector3 RightUp = Util.GetWorldSpacePos(Screen.width, Screen.height);
         float x = Mathf.Clamp(transform.position.x, LeftDown.x, RightUp.x);
         float y = Mathf.Clamp(transform.position.y, LeftDown.y, RightUp.y);
         if (x != transform.position.x)
@@ -49,20 +52,25 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             Vector2 mousePos = Mouse.current.position.ReadValue();
             // Convert to world space
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(
-                new Vector3(mousePos.x, mousePos.y, zDistance)
-            );
-            Vector3 direction = (mouseWorldPos - transform.position).normalized;
-            float sqrMagnitude = (mouseWorldPos - transform.position).sqrMagnitude;
+            Vector3 mouseWorldPos = Util.GetWorldSpacePos(mousePos.x, mousePos.y);
+            Vector3 directionVector = mouseWorldPos - transform.position;
+            Vector3 direction = directionVector.normalized;
+            float magnitude = directionVector.magnitude;
             // add force in that direction
-            Rb.linearVelocity = direction * sqrMagnitude * force;
+            Rb.linearVelocity = direction * magnitude * force * Time.deltaTime;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Origami")) { }
-        else if (other.gameObject.CompareTag("Scissors")) { }
+        if (other.CompareTag("Origami"))
+        {
+            onOrigamiCatch?.Invoke(other.GetComponent<Origami>().score);
+        }
+        else if (other.CompareTag("Scissors"))
+        {
+            onScissorsCatch?.Invoke();
+        }
         else return;
         Destroy(other.gameObject);
     }

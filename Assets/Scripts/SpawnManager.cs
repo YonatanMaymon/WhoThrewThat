@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    // USE FOR SOUNDS
+    public delegate void UnitSpawnedHandler(GameObject gameObject);
+    public static event UnitSpawnedHandler OnUnitSpawned;
+    //--------------------------------------------------------------
     public GameObject[] origamiPrefabs;
     public GameObject scissorsPrefab;
     public float scissorsSpawnPercent = 20;
@@ -11,45 +15,37 @@ public class SpawnManager : MonoBehaviour
     public float startSpawnRate = 0.5f;
     [Tooltip("how much the spawn rate increases each spawn by percentage")]
     public float spawnIncreaseRate = 2f;
-    [Tooltip("the length on each side of the x axis an object will spawn")]
-    public float spawnReach = 23f;
-    public float spawnHight = 20f;
+    private float SPAWN_WIDTH_OFFSET = 0.9f;
+    private float SPAWN_HIGHT_OFFSET = 1.3f;
     private bool spawnLoopRunning = false;
     private Coroutine spawnLoop;
 
     void Start()
     {
-
         StartSpawnLoop();
     }
 
-    /// <summary>
-    /// spawn either scissors or origami based on scissorsSpawnPercent
-    /// </summary>
+    // spawn a unit
     void Spawn()
     {
-        // isScissors chance to be  true is exactly scissorsSpawnPercent
         bool isScissors = scissorsSpawnPercent >= Random.Range(0f, 100f);
-        if (isScissors)
-            SpawnScissors();
-        else
-            SpawnOrigami();
+
+        // spawn a unit
+        Vector3 position = Util.GenerateRandomSpawnPointAboveScreen(SPAWN_WIDTH_OFFSET, SPAWN_HIGHT_OFFSET);
+        GameObject unit = isScissors ? SpawnScissors(position) : SpawnOrigami(position);
+        OnUnitSpawned?.Invoke(unit);
     }
-    void SpawnScissors()
+    GameObject SpawnScissors(Vector3 position)
     {
-        Instantiate(scissorsPrefab, GenerateRandomSpawnPoint(), scissorsPrefab.transform.rotation);
+        return Instantiate(scissorsPrefab, position, scissorsPrefab.transform.rotation);
     }
-    void SpawnOrigami()
+    GameObject SpawnOrigami(Vector3 position)
     {
         GameObject origamiPrefab = origamiPrefabs[Random.Range(0, origamiPrefabs.Length)];
-        Instantiate(origamiPrefab, GenerateRandomSpawnPoint(), origamiPrefab.transform.rotation);
+        return Instantiate(origamiPrefab, position, origamiPrefab.transform.rotation);
     }
 
-    Vector3 GenerateRandomSpawnPoint()
-    {
-        float x = Random.Range(-spawnReach, spawnReach);
-        return new Vector3(x, spawnHight, 0);
-    }
+
 
     //------------------------------------SpawnLoop------------------------------------
     void StartSpawnLoop()
