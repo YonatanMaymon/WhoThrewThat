@@ -15,7 +15,6 @@ public class SpawnManager : MonoBehaviour
     public float startSpawnRate = 0.5f;
     [Tooltip("how much the spawn rate increases each spawn by percentage")]
     public float spawnIncreaseRate = 2f;
-    private float SPAWN_WIDTH_OFFSET = 0.9f;
     private float SPAWN_HIGHT_OFFSET = 1.3f;
     private bool spawnLoopRunning = false;
     private Coroutine spawnLoop;
@@ -31,7 +30,7 @@ public class SpawnManager : MonoBehaviour
         bool isScissors = scissorsSpawnPercent >= Random.Range(0f, 100f);
 
         // spawn a unit
-        Vector3 position = Util.GenerateRandomSpawnPointAboveScreen(SPAWN_WIDTH_OFFSET, SPAWN_HIGHT_OFFSET);
+        Vector3 position = Util.GenerateRandomSpawnPointAboveScreen(SPAWN_HIGHT_OFFSET);
         GameObject unit = isScissors ? SpawnScissors(position) : SpawnOrigami(position);
         OnUnitSpawned?.Invoke(unit);
     }

@@ -36,12 +36,15 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     private void KeepOnScreen()
     {
-        Vector3 LeftDown = Util.GetWorldSpacePos(0, 0);
-        Vector3 RightUp = Util.GetWorldSpacePos(Screen.width, Screen.height);
-        float x = Mathf.Clamp(transform.position.x, LeftDown.x, RightUp.x);
+        float offsetX = Screen.width * GameManager.ScreenBufferX;
+        Vector3 leftDown = Util.GetWorldSpacePos(offsetX, 0);
+        Vector3 rightDown = Util.GetWorldSpacePos(Screen.width - offsetX, 0);
+        Vector3 up = Util.GetWorldSpacePos(Screen.width / 2, Screen.height);
+
+        float x = Mathf.Clamp(transform.position.x, leftDown.x, rightDown.x);
         if (x != transform.position.x)
             Rb.linearVelocity = new Vector3(0, Rb.linearVelocity.y, 0);
-        if (transform.position.y >= RightUp.y)
+        if (transform.position.y >= up.y)
             Rb.linearVelocity = new Vector3(Rb.linearVelocity.x, 0, 0);
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }

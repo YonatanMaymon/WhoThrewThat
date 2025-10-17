@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91dfe298314b39428408140f6525077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyOutBounds
-  torqueStrength: 8
+  torqueStrength: 10
 --- !u!1001 &2990121372858286605
 PrefabInstance:
   m_ObjectHideFlags: 0

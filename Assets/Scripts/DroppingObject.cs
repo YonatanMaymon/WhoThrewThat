@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DroppingObject : MonoBehaviour
 {
-    public float torqueStrength = 0.5f;
+    public float torqueStrength = 5f;
     private Rigidbody Rb;
     private void Start()
     {
