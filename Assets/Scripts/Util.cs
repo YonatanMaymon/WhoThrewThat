@@ -41,4 +41,13 @@ public static class Util
         Vector3 spawnPos = Util.GetWorldSpacePos(xSpawnScreenVal, Screen.height * hightOffset);
         return spawnPos;
     }
+
+    public static Vector3 GenerateRandomVector3(float axisVariance)
+    {
+        return new Vector3(RandomFloat(axisVariance), RandomFloat(axisVariance), RandomFloat(axisVariance));
+    }
+    private static float RandomFloat(float range)
+    {
+        return Random.Range(-range, range);
+    }
 }

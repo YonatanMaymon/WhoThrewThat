@@ -55,7 +55,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 0.3
   m_LinearDamping: 2.5
-  m_AngularDamping: 0.05
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91dfe298314b39428408140f6525077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyOutBounds
+  torqueStrength: 0.3
 --- !u!114 &-4586740804915437171
 MonoBehaviour:
   m_ObjectHideFlags: 0

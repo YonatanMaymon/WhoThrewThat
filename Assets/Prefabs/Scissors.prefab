@@ -64,7 +64,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7744841923717648994}
   serializedVersion: 5
-  m_Mass: 0.7
+  m_Mass: 0.3
   m_LinearDamping: 1.3
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91dfe298314b39428408140f6525077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyOutBounds
+  torqueStrength: 8
 --- !u!1001 &2990121372858286605
 PrefabInstance:
   m_ObjectHideFlags: 0
