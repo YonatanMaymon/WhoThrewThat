@@ -3,11 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-/*this script is supposed to do the following:
-* - "collect" animals and snakes
-* - the player should be thrown by the swipe of the pointer (click and drag, faster = more)
-* - clamp the player position in screen
-*/
+
 public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public static event Action onScissorsCatch;

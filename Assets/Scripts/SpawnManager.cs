@@ -24,27 +24,25 @@ public class SpawnManager : MonoBehaviour
         StartSpawnLoop();
     }
 
-    // spawn a unit
     void Spawn()
     {
         bool isScissors = scissorsSpawnPercent >= Random.Range(0f, 100f);
 
-        // spawn a unit
         Vector3 position = Util.GenerateRandomSpawnPointAboveScreen(SPAWN_HIGHT_OFFSET);
         GameObject unit = isScissors ? SpawnScissors(position) : SpawnOrigami(position);
         OnUnitSpawned?.Invoke(unit);
     }
+
     GameObject SpawnScissors(Vector3 position)
     {
         return Instantiate(scissorsPrefab, position, scissorsPrefab.transform.rotation);
     }
+
     GameObject SpawnOrigami(Vector3 position)
     {
         GameObject origamiPrefab = origamiPrefabs[Random.Range(0, origamiPrefabs.Length)];
         return Instantiate(origamiPrefab, position, origamiPrefab.transform.rotation);
     }
-
-
 
     //------------------------------------SpawnLoop------------------------------------
     void StartSpawnLoop()
@@ -52,12 +50,14 @@ public class SpawnManager : MonoBehaviour
         spawnLoopRunning = true;
         spawnLoop = StartCoroutine(SpawnLoopCoroutine());
     }
+
     void StopSpawnLoop()
     {
         spawnLoopRunning = false;
         if (spawnLoop != null)
             StopCoroutine(spawnLoop);
     }
+
     IEnumerator SpawnLoopCoroutine()
     {
         float spawnRate = startSpawnRate;
@@ -72,6 +72,7 @@ public class SpawnManager : MonoBehaviour
             spawnRate *= spawnRateModerator;
         }
     }
+
     void OnDisable()
     {
         StopSpawnLoop();
