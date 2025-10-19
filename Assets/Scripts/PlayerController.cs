@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public static event Action onScissorsCatch;
@@ -33,9 +34,9 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     private void KeepOnScreen()
     {
         float offsetX = Screen.width * GameManager.ScreenBufferX;
-        Vector3 leftDown = Util.GetWorldSpacePos(offsetX, 0);
-        Vector3 rightDown = Util.GetWorldSpacePos(Screen.width - offsetX, 0);
-        Vector3 up = Util.GetWorldSpacePos(Screen.width / 2, Screen.height);
+        Vector3 leftDown = VectorUtils.GetWorldSpacePos(offsetX, 0);
+        Vector3 rightDown = VectorUtils.GetWorldSpacePos(Screen.width - offsetX, 0);
+        Vector3 up = VectorUtils.GetWorldSpacePos(Screen.width / 2, Screen.height);
 
         float x = Mathf.Clamp(transform.position.x, leftDown.x, rightDown.x);
         if (x != transform.position.x)
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             Vector2 mousePos = Mouse.current.position.ReadValue();
             // Convert to world space
-            Vector3 mouseWorldPos = Util.GetWorldSpacePos(mousePos.x, mousePos.y);
+            Vector3 mouseWorldPos = VectorUtils.GetWorldSpacePos(mousePos.x, mousePos.y);
             Vector3 directionVector = mouseWorldPos - transform.position;
             Vector3 direction = directionVector.normalized;
             float magnitude = directionVector.magnitude;

@@ -7,7 +7,7 @@ public class DroppingObject : MonoBehaviour
     private void Start()
     {
         Rb = GetComponent<Rigidbody>();
-        Rb.AddTorque(Util.GenerateRandomVector3(torqueStrength));
+        Rb.AddTorque(VectorUtils.GenerateRandomVector3(torqueStrength));
     }
     private void OnCollisionEnter(Collision other)
     {
