@@ -16,11 +16,6 @@ public class ScoreManager : MonoBehaviour
         PlayerController.onOrigamiCatch += AddScore;
     }
 
-    private void OnDisable()
-    {
-        PlayerController.onOrigamiCatch -= AddScore;
-    }
-
     private void AddScore(int score)
     {
         _score += score;
@@ -30,5 +25,9 @@ public class ScoreManager : MonoBehaviour
     private void UpdateScore()
     {
         scoreTextMesh.SetText("Score: " + _score);
+    }
+    private void OnDisable()
+    {
+        PlayerController.onOrigamiCatch -= AddScore;
     }
 }

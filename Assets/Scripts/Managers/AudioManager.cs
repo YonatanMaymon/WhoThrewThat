@@ -9,23 +9,34 @@ public class AudioManager : MonoBehaviour
     public VolumeSettings volumeSettings;
     private AudioSource musicSource;
     private AudioSource collectingSource;
-    private bool inGame = true;
+    private bool gamePlaying = true;
     void Start()
     {
+        // subscribing to events
         PlayerController.onOrigamiCatch += OnOrigamiCatch;
+        GameManager.onGameOver += OnGameOver;
+
         musicSource = AddAudioSource(volumeSettings.musicVolume);
         collectingSource = AddAudioSource(volumeSettings.CollectingVolume);
         StartCoroutine(PlayAndWait());
     }
+
     private AudioSource AddAudioSource(float volumeModerator)
     {
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = volumeSettings.masterVolume * volumeModerator;
         return audioSource;
     }
+
+    private void OnGameOver()
+    {
+        gamePlaying = false;
+        musicSource.Stop();
+    }
+
     IEnumerator PlayAndWait()
     {
-        while (inGame)
+        while (gamePlaying)
         {
             PlayRandom();
             yield return new WaitWhile(() => musicSource.isPlaying);
@@ -40,5 +51,11 @@ public class AudioManager : MonoBehaviour
     {
         collectingSource.resource = OrigamiCatch;
         collectingSource.Play();
+    }
+    private void OnDisable()
+    {
+        // unsubscribing to events
+        PlayerController.onOrigamiCatch -= OnOrigamiCatch;
+        GameManager.onGameOver -= OnGameOver;
     }
 }

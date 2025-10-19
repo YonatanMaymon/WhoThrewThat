@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static event Action onStopGame;
+    public static event Action onGameOver;
     public GameObject gameOverScreen;
     public float gravityModerator = 1f;
     public static float ScreenBufferX = 0.05f;
@@ -22,8 +22,12 @@ public class GameManager : MonoBehaviour
     private void OnGameOver()
     {
         gameOverScreen.SetActive(true);
-        onStopGame?.Invoke();
+        onGameOver?.Invoke();
     }
 
+    private void OnDisable()
+    {
+        PlayerController.onScissorsCatch -= OnGameOver;
+    }
 
 }

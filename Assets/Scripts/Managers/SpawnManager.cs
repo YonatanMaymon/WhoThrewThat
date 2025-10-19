@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartSpawnLoop();
-        GameManager.onStopGame += StopSpawnLoop;
+        GameManager.onGameOver += StopSpawnLoop;
     }
 
     void Spawn()
@@ -66,5 +66,6 @@ public class SpawnManager : MonoBehaviour
     void OnDisable()
     {
         StopSpawnLoop();
+        GameManager.onGameOver -= StopSpawnLoop;
     }
 }
