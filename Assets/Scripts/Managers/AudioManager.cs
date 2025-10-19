@@ -5,14 +5,14 @@ public class AudioManager : MonoBehaviour
 {
     public AudioClip menuMusic;
     public AudioClip[] gameMusic;
-    public AudioClip OrigamiCatch;
+    public AudioClip gameOverAudio;
+    public AudioClip OrigamiCatchAudio;
     public VolumeSettings volumeSettings;
     private AudioSource musicSource;
     private AudioSource collectingSource;
     private bool gamePlaying = true;
     void Start()
     {
-        // subscribing to events
         PlayerController.onOrigamiCatch += OnOrigamiCatch;
         GameManager.onGameOver += OnGameOver;
 
@@ -31,7 +31,8 @@ public class AudioManager : MonoBehaviour
     private void OnGameOver()
     {
         gamePlaying = false;
-        musicSource.Stop();
+        musicSource.resource = gameOverAudio;
+        musicSource.Play();
     }
 
     IEnumerator PlayAndWait()
@@ -49,12 +50,11 @@ public class AudioManager : MonoBehaviour
     }
     private void OnOrigamiCatch(int _data)
     {
-        collectingSource.resource = OrigamiCatch;
+        collectingSource.resource = OrigamiCatchAudio;
         collectingSource.Play();
     }
     private void OnDisable()
     {
-        // unsubscribing to events
         PlayerController.onOrigamiCatch -= OnOrigamiCatch;
         GameManager.onGameOver -= OnGameOver;
     }

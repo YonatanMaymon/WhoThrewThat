@@ -1930,7 +1930,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
   - {fileID: 8300000, guid: 89f935015cc98724a862a586326fdf21, type: 3}
   - {fileID: 8300000, guid: 35967e8a4dfb1664e9b066939272c0a4, type: 3}
-  OrigamiCatch: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  gameOverAudio: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  OrigamiCatchAudio: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   volumeSettings:
     masterVolume: 0.5
     musicVolume: 0.4
