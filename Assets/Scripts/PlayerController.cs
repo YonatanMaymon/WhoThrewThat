@@ -12,17 +12,11 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public float force = 10f;
     public float holdTime = 0.2f;
     private Rigidbody Rb;
-    private float zDistance;
     private bool isPointerDown = false;
 
     void Start()
     {
-
         Rb = GetComponent<Rigidbody>();
-
-        // the distance of the player from the camera in the z axis
-        // (needed to calculate the mouse location)
-        zDistance = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
     }
 
     private void Update()
