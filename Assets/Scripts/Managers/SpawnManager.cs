@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static event Action onScissorsSpawn;
     public GameObject[] origamiPrefabs;
     public GameObject scissorsPrefab;
     public SpawnSettings spawnSettings;
@@ -26,6 +29,7 @@ public class SpawnManager : MonoBehaviour
 
     GameObject SpawnScissors(Vector3 position)
     {
+        onScissorsSpawn?.Invoke();
         return Instantiate(scissorsPrefab, position, scissorsPrefab.transform.rotation);
     }
 

@@ -7,17 +7,21 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] gameMusic;
     public AudioClip gameOverAudio;
     public AudioClip OrigamiCatchAudio;
+    public AudioClip ScissorsSpawnAudio;
     public VolumeSettings volumeSettings;
     private AudioSource musicSource;
-    private AudioSource collectingSource;
+    private AudioSource collectAudioSource;
+    private AudioSource scissorsAudioSource;
     private bool gamePlaying = true;
     void Start()
     {
+        SpawnManager.onScissorsSpawn += OnScissorsSpawn;
         PlayerController.onOrigamiCatch += OnOrigamiCatch;
         GameManager.onGameOver += OnGameOver;
 
         musicSource = AddAudioSource(volumeSettings.musicVolume);
-        collectingSource = AddAudioSource(volumeSettings.CollectingVolume);
+        collectAudioSource = AddAudioSource(volumeSettings.collectingVolume);
+        scissorsAudioSource = AddAudioSource(volumeSettings.scissorsIndicatorVolume);
         StartCoroutine(PlayAndWait());
     }
 
@@ -50,11 +54,18 @@ public class AudioManager : MonoBehaviour
     }
     private void OnOrigamiCatch(int _data)
     {
-        collectingSource.resource = OrigamiCatchAudio;
-        collectingSource.Play();
+        collectAudioSource.resource = OrigamiCatchAudio;
+        collectAudioSource.Play();
     }
+    private void OnScissorsSpawn()
+    {
+        scissorsAudioSource.resource = ScissorsSpawnAudio;
+        scissorsAudioSource.Play();
+    }
+
     private void OnDisable()
     {
+        SpawnManager.onScissorsSpawn -= OnScissorsSpawn;
         PlayerController.onOrigamiCatch -= OnOrigamiCatch;
         GameManager.onGameOver -= OnGameOver;
     }
