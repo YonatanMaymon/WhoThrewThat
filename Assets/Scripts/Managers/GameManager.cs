@@ -1,21 +1,12 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static event Action onStopGame;
     public GameObject gameOverScreen;
     public float gravityModerator = 1f;
     public static float ScreenBufferX = 0.05f;
-    public static GameManager instance { get; private set; }
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-    }
 
     void Start()
     {
@@ -26,11 +17,8 @@ public class GameManager : MonoBehaviour
     private void OnGameOver()
     {
         gameOverScreen.SetActive(true);
+        onStopGame?.Invoke();
     }
 
-    private void OnDestroy()
-    {
-        if (instance == this)
-            instance = null;
-    }
+
 }

@@ -3,34 +3,25 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    // USE FOR SOUNDS
-    public delegate void UnitSpawnedHandler(GameObject gameObject);
-    public static event UnitSpawnedHandler OnUnitSpawned;
-    //--------------------------------------------------------------
     public GameObject[] origamiPrefabs;
     public GameObject scissorsPrefab;
-    public float scissorsSpawnPercent = 20;
-
-    [Tooltip("starting spawn rate per second")]
-    public float startSpawnRate = 0.5f;
-    [Tooltip("how much the spawn rate increases each spawn by percentage")]
-    public float spawnIncreaseRate = 2f;
+    public SpawnSettings spawnSettings;
+    private Coroutine spawnLoop;
     private float SPAWN_HIGHT_OFFSET = 1.3f;
     private bool spawnLoopRunning = false;
-    private Coroutine spawnLoop;
 
     void Start()
     {
         StartSpawnLoop();
+        GameManager.onStopGame += StopSpawnLoop;
     }
 
     void Spawn()
     {
-        bool isScissors = scissorsSpawnPercent >= Random.Range(0f, 100f);
+        bool isScissors = spawnSettings.scissorsSpawnPercent >= Random.Range(0f, 100f);
 
         Vector3 position = VectorUtils.GenerateRandomSpawnPointAboveScreen(SPAWN_HIGHT_OFFSET);
         GameObject unit = isScissors ? SpawnScissors(position) : SpawnOrigami(position);
-        OnUnitSpawned?.Invoke(unit);
     }
 
     GameObject SpawnScissors(Vector3 position)
@@ -44,7 +35,6 @@ public class SpawnManager : MonoBehaviour
         return Instantiate(origamiPrefab, position, origamiPrefab.transform.rotation);
     }
 
-    //------------------------------------SpawnLoop------------------------------------
     void StartSpawnLoop()
     {
         spawnLoopRunning = true;
@@ -60,7 +50,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnLoopCoroutine()
     {
-        float spawnRate = startSpawnRate;
+        float spawnRate = spawnSettings.startSpawnRate;
         while (spawnLoopRunning)
         {
             Spawn();
@@ -68,7 +58,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
             // adjust spawnRate based on spawnIncreaseRate
             float exponentialSpawnLimiter = (float)Mathf.Pow(2, spawnRate);
-            float spawnRateModerator = spawnIncreaseRate / (100f * exponentialSpawnLimiter) + 1f;
+            float spawnRateModerator = spawnSettings.spawnIncreaseRate / (100f * exponentialSpawnLimiter) + 1f;
             spawnRate *= spawnRateModerator;
         }
     }
