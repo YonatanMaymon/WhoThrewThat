@@ -37,13 +37,7 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
     {
-        StartCoroutine(LoadSceneMusic(scene));
-    }
-
-    private IEnumerator LoadSceneMusic(Scene scene)
-    {
         StopMusic();
-        yield return new WaitForSeconds(audioSettings.delayMusicOnSceneLoadTime);
         switch (scene.buildIndex)
         {
             case (int)Enums.SCENES.MENU:
@@ -57,6 +51,7 @@ public class AudioManager : MonoBehaviour
         }
         ;
     }
+
     private void StopMusic()
     {
         if (musicCoroutine != null)
@@ -65,6 +60,7 @@ public class AudioManager : MonoBehaviour
     }
     IEnumerator PlayMenuMusic()
     {
+        yield return new WaitForSeconds(audioSettings.delayMusicBeforePlayTime);
         musicSource.resource = menuMusic;
         musicSource.Play();
         yield return new WaitWhile(() => musicSource.isPlaying);
@@ -74,6 +70,7 @@ public class AudioManager : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(audioSettings.delayMusicBeforePlayTime);
             PlayRandomGameMusic();
             yield return new WaitWhile(() => musicSource.isPlaying);
         }
