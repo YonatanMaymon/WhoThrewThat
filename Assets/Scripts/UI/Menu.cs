@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -7,10 +8,12 @@ using consts = Consts.Menu;
 
 public class Menu : MonoBehaviour
 {
+    public static event Action onButtonClick;
     private VisualElement root;
     private VisualElement secondaryContainer;
     private VisualElement mainContainer;
     private Button startButton;
+    private List<Button> allButtons;
 
 
     private void Awake()
@@ -20,10 +23,24 @@ public class Menu : MonoBehaviour
         secondaryContainer = root.Q<VisualElement>(consts.SecondaryContainerName);
         mainContainer = root.Q<VisualElement>(consts.MainContainerName);
         startButton = root.Q<Button>(consts.StartButtonName);
+        allButtons = root.Query<Button>(className: consts.ButtonClass).ToList();
     }
     private void OnEnable()
     {
         startButton.clicked += OnStartClick;
+        foreach (Button button in allButtons)
+        {
+            button.clicked += OnButtonClick;
+        }
+    }
+    private void Start()
+    {
+        StartCoroutine(DelayedShowMenu());
+    }
+
+    private void OnButtonClick()
+    {
+        onButtonClick?.Invoke();
     }
 
     private void OnStartClick()
@@ -31,15 +48,18 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene((int)Enums.SCENES.GAME);
     }
 
-    private void Start()
-    {
-        StartCoroutine(DelayedShowMenu());
-    }
-
     private IEnumerator DelayedShowMenu()
     {
         yield return new WaitForSeconds(1f);
         secondaryContainer.RemoveFromClassList(consts.SecondaryContainerHiddenClass);
         mainContainer.AddToClassList(consts.TintClass);
+    }
+    private void OnDisable()
+    {
+        startButton.clicked -= OnStartClick;
+        foreach (Button button in allButtons)
+        {
+            button.clicked -= OnButtonClick;
+        }
     }
 }

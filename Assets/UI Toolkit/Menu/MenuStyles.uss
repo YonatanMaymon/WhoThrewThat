@@ -21,7 +21,7 @@
 }
 
 .text {
-    -unity-font-definition: url("project://database/Assets/FPSFont/FPS%20Gaming%20Font/Square-Black.ttf?fileID=12800000&guid=d7cffddcbc0cc8f4ebe6e28eb9804082&type=3#Square-Black");
+    -unity-font-definition: url("project://database/Assets/Assets/FPSFont/FPS%20Gaming%20Font/Square-Black.ttf?fileID=12800000&guid=d7cffddcbc0cc8f4ebe6e28eb9804082&type=3#Square-Black");
     -unity-font-style: italic;
     text-overflow: clip;
     white-space: pre-wrap;
@@ -36,6 +36,7 @@
 .secondary-container-hidden {
     left: auto;
     translate: -100% 0;
+    display: flex;
 }
 
 .tint {

@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip[] gameMusic;
-    public AudioClip menuMusic, gameOverAudio, OrigamiCatchAudio, ScissorsSpawnAudio;
+    public AudioClip menuMusic, gameOverAudio, OrigamiCatchAudio, ScissorsSpawnAudio, buttonClick;
     public AudioSettings audioSettings;
-    private AudioSource musicSource, collectAudioSource, scissorsAudioSource;
+    private AudioSource musicSource, collectAudioSource, scissorsAudioSource, UIAudioSource;
     private Coroutine musicCoroutine;
     private void Awake()
     {
@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoad;
+        Menu.onButtonClick += OnButtonClicked;
         SpawnManager.onScissorsSpawn += OnScissorsSpawn;
         PlayerController.onOrigamiCatch += OnOrigamiCatch;
         GameManager.onGameOver += OnGameOver;
@@ -25,14 +26,20 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         musicSource = AddAudioSource(audioSettings.musicVolume);
-        collectAudioSource = AddAudioSource(audioSettings.collectingVolume);
-        scissorsAudioSource = AddAudioSource(audioSettings.scissorsIndicatorVolume);
+        UIAudioSource = AddAudioSource(audioSettings.SFXVolume);
+        collectAudioSource = AddAudioSource(audioSettings.SFXVolume);
+        scissorsAudioSource = AddAudioSource(audioSettings.SFXVolume);
     }
     private AudioSource AddAudioSource(float volumeModerator)
     {
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = audioSettings.masterVolume * volumeModerator;
         return audioSource;
+    }
+    private void OnButtonClicked()
+    {
+        UIAudioSource.resource = buttonClick;
+        UIAudioSource.Play();
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
@@ -104,6 +111,7 @@ public class AudioManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoad;
+        Menu.onButtonClick -= OnButtonClicked;
         SpawnManager.onScissorsSpawn -= OnScissorsSpawn;
         PlayerController.onOrigamiCatch -= OnOrigamiCatch;
         GameManager.onGameOver -= OnGameOver;
