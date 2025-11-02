@@ -10,7 +10,6 @@ public class AudioManager : MonoBehaviour
     public AudioSettings audioSettings;
     private AudioSource musicSource, collectAudioSource, scissorsAudioSource;
     private Coroutine musicCoroutine;
-    private bool gamePlaying = true;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -43,35 +42,37 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator LoadSceneMusic(Scene scene)
     {
+        StopMusic();
         yield return new WaitForSeconds(audioSettings.delayMusicOnSceneLoadTime);
         switch (scene.buildIndex)
         {
             case (int)Enums.SCENES.MENU:
-                StartMusicCoroutine(PlayMenuMusic());
+                musicCoroutine = StartCoroutine(PlayMenuMusic());
                 break;
             case (int)Enums.SCENES.GAME:
-                StartMusicCoroutine(PlayGameMusic());
+                musicCoroutine = StartCoroutine(PlayGameMusic());
                 break;
             default:
                 throw new ArgumentException($"Scene '{scene.rootCount} is not defined in Enums.SCENES");
         }
         ;
     }
-    private void StartMusicCoroutine(IEnumerator routine)
+    private void StopMusic()
     {
         if (musicCoroutine != null)
             StopCoroutine(musicCoroutine);
-        musicCoroutine = StartCoroutine(routine);
+        musicSource?.Stop();
     }
     IEnumerator PlayMenuMusic()
     {
         musicSource.resource = menuMusic;
+        musicSource.Play();
         yield return new WaitWhile(() => musicSource.isPlaying);
-        StartMusicCoroutine(PlayGameMusic());
+        musicCoroutine = StartCoroutine(PlayGameMusic());
     }
     IEnumerator PlayGameMusic()
     {
-        while (gamePlaying)
+        while (true)
         {
             PlayRandomGameMusic();
             yield return new WaitWhile(() => musicSource.isPlaying);
@@ -86,8 +87,7 @@ public class AudioManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        gamePlaying = false;
-        StopCoroutine(musicCoroutine);
+        StopMusic();
         musicSource.resource = gameOverAudio;
         musicSource.Play();
     }
