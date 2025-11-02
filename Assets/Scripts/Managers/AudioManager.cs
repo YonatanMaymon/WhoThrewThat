@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoad;
-        Menu.onButtonClick += OnButtonClicked;
+        MenuUI.onButtonClick += OnButtonClicked;
         SpawnManager.onScissorsSpawn += OnScissorsSpawn;
         PlayerController.onOrigamiCatch += OnOrigamiCatch;
         GameManager.onGameOver += OnGameOver;
@@ -111,7 +111,7 @@ public class AudioManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoad;
-        Menu.onButtonClick -= OnButtonClicked;
+        MenuUI.onButtonClick -= OnButtonClicked;
         SpawnManager.onScissorsSpawn -= OnScissorsSpawn;
         PlayerController.onOrigamiCatch -= OnOrigamiCatch;
         GameManager.onGameOver -= OnGameOver;

@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Game/GameStyles.uss?fileID=7433441132597879392&amp;guid=38fa3cd1753b8aa4795b034558bff729&amp;type=3#GameStyles" />
+    <Style src="project://database/Assets/UI%20Toolkit/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=f3489685772faab4fae080381bc695f8&amp;type=3#GeneralStyles" />
+    <ui:VisualElement name="MainContainer" picking-mode="Ignore" style="flex-grow: 1; padding-top: 30px; padding-right: 30px; padding-bottom: 30px; padding-left: 30px;">
+        <ui:Label text="Score: 0" name="Score" class="text" style="font-size: 115px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-outline-width: 5px; -unity-text-outline-color: rgb(19, 19, 19); white-space: nowrap; text-overflow: ellipsis; min-width: 483px; align-items: flex-start; justify-content: flex-start; align-self: flex-start; -unity-text-align: upper-left;" />
+    </ui:VisualElement>
+</ui:UXML>

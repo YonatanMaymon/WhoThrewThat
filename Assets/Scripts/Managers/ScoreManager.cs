@@ -1,9 +1,10 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreTextMesh;
+    public static event Action<int> onScoreUpdate;
     private int _score = 0;
 
     private void Start()
@@ -24,7 +25,7 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScore()
     {
-        scoreTextMesh.SetText("Score: " + _score);
+        onScoreUpdate?.Invoke(_score);
     }
     private void OnDisable()
     {

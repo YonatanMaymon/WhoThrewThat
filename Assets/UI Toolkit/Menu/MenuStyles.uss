@@ -4,7 +4,7 @@
 .button {
     width: 483px;
     height: 100px;
-    font-size: 62px;
+    font-size: 82px;
     margin-top: 12px;
     margin-right: 0;
     margin-bottom: 12px;
@@ -20,27 +20,10 @@
     border-bottom-left-radius: 21px;
 }
 
-.text {
-    -unity-font-definition: url("project://database/Assets/Assets/FPSFont/FPS%20Gaming%20Font/Square-Black.ttf?fileID=12800000&guid=d7cffddcbc0cc8f4ebe6e28eb9804082&type=3#Square-Black");
-    -unity-font-style: italic;
-    text-overflow: clip;
-    white-space: pre-wrap;
-    align-self: flex-start;
-    align-items: center;
-    justify-content: flex-end;
-    align-content: flex-start;
-    -unity-text-align: middle-center;
-    color: rgb(254, 246, 230);
-}
-
 .secondary-container-hidden {
     left: auto;
-    translate: -100% 0;
+    translate: -110% 0;
     display: flex;
-}
-
-.tint {
-    -unity-background-image-tint-color: rgb(207, 207, 207);
 }
 
 .button:hover {

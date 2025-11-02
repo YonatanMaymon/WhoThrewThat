@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using consts = Consts.Menu;
 
-public class Menu : MonoBehaviour
+public class MenuUI : MonoBehaviour
 {
     public static event Action onButtonClick;
     private VisualElement root;
