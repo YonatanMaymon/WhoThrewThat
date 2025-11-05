@@ -1,3 +1,11 @@
 :root {
+}
 
+.button.button--large {
+    width: 702px;
+    height: 115px;
+    font-size: 104px;
+}
+
+.hide {
 }

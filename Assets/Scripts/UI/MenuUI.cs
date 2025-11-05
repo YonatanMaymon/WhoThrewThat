@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using consts = Consts.Menu;
+using Consts = UIConsts.Menu;
 
 public class MenuUI : MonoBehaviour
 {
@@ -20,10 +20,10 @@ public class MenuUI : MonoBehaviour
     {
         root = GetComponent<UIDocument>().rootVisualElement;
 
-        secondaryContainer = root.Q<VisualElement>(consts.SecondaryContainerName);
-        mainContainer = root.Q<VisualElement>(consts.MainContainerName);
-        startButton = root.Q<Button>(consts.StartButtonName);
-        allButtons = root.Query<Button>(className: consts.ButtonClass).ToList();
+        secondaryContainer = root.Q<VisualElement>(Consts.SecondaryContainerName);
+        mainContainer = root.Q<VisualElement>(Consts.MainContainerName);
+        startButton = root.Q<Button>(Consts.StartButtonName);
+        allButtons = root.Query<Button>(className: Consts.ButtonClass).ToList();
     }
     private void OnEnable()
     {
@@ -51,8 +51,8 @@ public class MenuUI : MonoBehaviour
     private IEnumerator DelayedShowMenu()
     {
         yield return new WaitForSeconds(1f);
-        secondaryContainer.RemoveFromClassList(consts.SecondaryContainerHiddenClass);
-        mainContainer.AddToClassList(consts.TintClass);
+        secondaryContainer.RemoveFromClassList(Consts.SecondaryContainerHiddenClass);
+        mainContainer.AddToClassList(Consts.TintClass);
     }
     private void OnDisable()
     {

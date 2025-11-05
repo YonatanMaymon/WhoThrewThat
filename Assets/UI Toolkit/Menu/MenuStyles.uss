@@ -1,32 +1,8 @@
 :root {
 }
 
-.button {
-    width: 483px;
-    height: 100px;
-    font-size: 82px;
-    margin-top: 12px;
-    margin-right: 0;
-    margin-bottom: 12px;
-    margin-left: 0;
-    background-color: rgb(71, 77, 64);
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    border-top-left-radius: 21px;
-    border-top-right-radius: 21px;
-    border-bottom-right-radius: 21px;
-    border-bottom-left-radius: 21px;
-}
-
 .secondary-container-hidden {
     left: auto;
     translate: -110% 0;
     display: flex;
-}
-
-.button:hover {
-    -unity-background-image-tint-color: rgb(255, 255, 255);
-    background-color: rgb(48, 53, 41);
 }
