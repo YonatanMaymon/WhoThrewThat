@@ -7,16 +7,17 @@ using Consts = UIConsts.Game;
 public class GameUI : MonoBehaviour
 {
     private int _score = 0;
-    VisualElement root;
-    VisualElement gameOverUIContainer;
-    Label updatingScoreLabel;
-    Label finalScoreLabel;
-    Button restartButton;
-    Button menuButton;
+    VisualElement root, gameOverUIContainer;
+    Label updatingScoreLabel, finalScoreLabel;
+    Button restartButton, menuButton;
+
+    private void Awake()
+    {
+        AssignVariables();
+    }
+
     private void OnEnable()
     {
-        AssignUIVariables();
-
         ScoreManager.onScoreUpdate += OnScoreUpdate;
         GameManager.onGameOver += OnGameOver;
         restartButton.clicked += OnRestartClick;
@@ -30,7 +31,7 @@ public class GameUI : MonoBehaviour
         gameOverUIContainer.RemoveFromClassList(Consts.HideClass);
     }
 
-    private void AssignUIVariables()
+    private void AssignVariables()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
         gameOverUIContainer = root.Q<VisualElement>(Consts.GameOverUIContainerName);

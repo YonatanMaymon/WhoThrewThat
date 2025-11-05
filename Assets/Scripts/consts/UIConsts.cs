@@ -1,12 +1,15 @@
 public static class UIConsts
 {
+    public static class General
+    {
+        public const string ButtonClass = "button";
+    }
     public static class Menu
     {
         public const string SecondaryContainerName = "SecondaryContainer";
         public const string MainContainerName = "MainContainer";
         public const string SecondaryContainerHiddenClass = "secondary-container-hidden";
         public const string TintClass = "tint";
-        public const string ButtonClass = "button";
         public const string StartButtonName = "StartButton";
         public const string ShopButtonName = "ShopButton";
         public const string SettingsButtonName = "SettingsButton";

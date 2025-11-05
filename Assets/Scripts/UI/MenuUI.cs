@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -8,44 +7,66 @@ using Consts = UIConsts.Menu;
 
 public class MenuUI : MonoBehaviour
 {
-    public static event Action onButtonClick;
-    private VisualElement root;
-    private VisualElement secondaryContainer;
-    private VisualElement mainContainer;
-    private Button startButton;
-    private List<Button> allButtons;
+    private VisualElement root, secondaryContainer, mainContainer;
+    private Button startButton, shopButton, settingsButton, exitButton;
 
 
     private void Awake()
+    {
+        AssignVariables();
+    }
+    private void OnEnable()
+    {
+        startButton.clicked += OnStartClick;
+        settingsButton.clicked += OnSettingClick;
+        shopButton.clicked += OnShopClick;
+        exitButton.clicked += OnExitClick;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(DelayedShowMenu());
+    }
+
+    private void AssignVariables()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
 
         secondaryContainer = root.Q<VisualElement>(Consts.SecondaryContainerName);
         mainContainer = root.Q<VisualElement>(Consts.MainContainerName);
         startButton = root.Q<Button>(Consts.StartButtonName);
-        allButtons = root.Query<Button>(className: Consts.ButtonClass).ToList();
-    }
-    private void OnEnable()
-    {
-        startButton.clicked += OnStartClick;
-        foreach (Button button in allButtons)
-        {
-            button.clicked += OnButtonClick;
-        }
-    }
-    private void Start()
-    {
-        StartCoroutine(DelayedShowMenu());
+        shopButton = root.Q<Button>(Consts.ShopButtonName);
+        settingsButton = root.Q<Button>(Consts.SettingsButtonName);
+        exitButton = root.Q<Button>(Consts.ExitButtonName);
+
+        if (secondaryContainer == null || mainContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
+            throw new InvalidOperationException("UI elements name is different the the ones defined in UIConsts");
     }
 
-    private void OnButtonClick()
-    {
-        onButtonClick?.Invoke();
-    }
+
 
     private void OnStartClick()
     {
         SceneManager.LoadScene((int)Enums.SCENES.GAME);
+    }
+
+    private void OnShopClick()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnSettingClick()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnExitClick()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     private IEnumerator DelayedShowMenu()
@@ -57,9 +78,8 @@ public class MenuUI : MonoBehaviour
     private void OnDisable()
     {
         startButton.clicked -= OnStartClick;
-        foreach (Button button in allButtons)
-        {
-            button.clicked -= OnButtonClick;
-        }
+        settingsButton.clicked -= OnSettingClick;
+        shopButton.clicked -= OnShopClick;
+        exitButton.clicked -= OnExitClick;
     }
 }

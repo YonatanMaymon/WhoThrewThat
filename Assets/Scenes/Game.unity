@@ -1358,6 +1358,7 @@ GameObject:
   - component: {fileID: 1310046369}
   - component: {fileID: 1310046368}
   - component: {fileID: 1310046370}
+  - component: {fileID: 1310046371}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -1415,6 +1416,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b0c10e8552e314b94cf4dd07f44798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUI
+--- !u!114 &1310046371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310046367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403a3b17dd6aaba4594d1e0e19c2ffbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
 --- !u!4 &1396887606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2bb502117d5fabd4196bd498ba384b6b, type: 3}

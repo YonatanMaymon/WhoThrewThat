@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 524943455}
   - component: {fileID: 524943454}
   - component: {fileID: 524943456}
+  - component: {fileID: 524943457}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -187,6 +188,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1312c169378f145b6a721866489e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Menu
+--- !u!114 &524943457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524943453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403a3b17dd6aaba4594d1e0e19c2ffbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralUI
 --- !u!1 &680511045
 GameObject:
   m_ObjectHideFlags: 0
