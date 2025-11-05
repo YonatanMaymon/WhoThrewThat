@@ -6,6 +6,7 @@ using Consts = UIConsts.Game;
 
 public class GameUI : MonoBehaviour
 {
+    private int _score = 0;
     VisualElement root;
     VisualElement gameOverUIContainer;
     Label updatingScoreLabel;
@@ -24,6 +25,7 @@ public class GameUI : MonoBehaviour
 
     private void OnGameOver()
     {
+        finalScoreLabel.text = "" + _score;
         updatingScoreLabel.AddToClassList(Consts.HideClass);
         gameOverUIContainer.RemoveFromClassList(Consts.HideClass);
     }
@@ -44,6 +46,7 @@ public class GameUI : MonoBehaviour
 
     private void OnScoreUpdate(int score)
     {
+        _score = score;
         updatingScoreLabel.text = "Score: " + score;
     }
 
