@@ -1,10 +1,10 @@
 using System;
-using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     public static event Action<int> onScoreUpdate;
+    private const int ScoreForCoin = 25;
     private int _score = 0;
 
     private void Start()
@@ -15,6 +15,12 @@ public class ScoreManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.onOrigamiCatch += AddScore;
+        GameManager.onGameOver += OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        DataManager.instance.AddToCoins(_score / ScoreForCoin);
     }
 
     private void AddScore(int score)
@@ -30,5 +36,6 @@ public class ScoreManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerController.onOrigamiCatch -= AddScore;
+        GameManager.onGameOver -= OnGameOver;
     }
 }

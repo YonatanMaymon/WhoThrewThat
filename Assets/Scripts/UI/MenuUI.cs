@@ -62,11 +62,7 @@ public class MenuUI : MonoBehaviour
 
     private void OnExitClick()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        GameManager.instance.ExitGame();
     }
 
     private IEnumerator DelayedShowMenu()
