@@ -7,7 +7,7 @@ using Consts = UIConsts.Menu;
 
 public class MenuUI : MonoBehaviour
 {
-    private VisualElement root, secondaryContainer, mainContainer;
+    private VisualElement root, secondaryContainer;
     private Button startButton, shopButton, settingsButton, exitButton;
 
 
@@ -33,13 +33,12 @@ public class MenuUI : MonoBehaviour
         root = GetComponent<UIDocument>().rootVisualElement;
 
         secondaryContainer = root.Q<VisualElement>(Consts.SecondaryContainerName);
-        mainContainer = root.Q<VisualElement>(Consts.MainContainerName);
         startButton = root.Q<Button>(Consts.StartButtonName);
         shopButton = root.Q<Button>(Consts.ShopButtonName);
         settingsButton = root.Q<Button>(Consts.SettingsButtonName);
         exitButton = root.Q<Button>(Consts.ExitButtonName);
 
-        if (secondaryContainer == null || mainContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
+        if (secondaryContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
             throw new InvalidOperationException("UI elements name is different the the ones defined in UIConsts");
     }
 
@@ -69,6 +68,11 @@ public class MenuUI : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         secondaryContainer.RemoveFromClassList(Consts.SecondaryContainerHiddenClass);
+        TintBackground();
+    }
+    private void TintBackground()
+    {
+        VisualElement mainContainer = root.Q<VisualElement>(Consts.MainContainerName);
         mainContainer.AddToClassList(Consts.TintClass);
     }
     private void OnDisable()

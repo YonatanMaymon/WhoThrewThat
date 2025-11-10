@@ -8,6 +8,7 @@ public static class UIConsts
     {
         public const string SecondaryContainerName = "SecondaryContainer";
         public const string MainContainerName = "MainContainer";
+        public const string OrigamiManImageName = "OrigamiManImage";
         public const string SecondaryContainerHiddenClass = "secondary-container-hidden";
         public const string TintClass = "tint";
         public const string StartButtonName = "StartButton";
