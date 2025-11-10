@@ -7,3 +7,12 @@
     display: flex;
     opacity: 0;
 }
+
+.origami-man-hidden {
+    opacity: 0;
+    translate: 100% 0;
+}
+
+.shop-hidden {
+    opacity: 0;
+}
