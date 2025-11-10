@@ -5,4 +5,5 @@
     left: auto;
     translate: -110% 0;
     display: flex;
+    opacity: 0;
 }
