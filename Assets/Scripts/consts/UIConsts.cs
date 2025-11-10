@@ -19,6 +19,7 @@ public static class UIConsts
     {
         public const string UpdatingScoreName = "UpdatingScore";
         public const string FinalScoreName = "FinalScore";
+        public const string CoinAmountName = "CoinAmount";
         public const string GameOverUIContainerName = "GameOverUIContainer";
         public const string RestartButtonName = "RestartButton";
         public const string MenuButtonName = "MenuButton";

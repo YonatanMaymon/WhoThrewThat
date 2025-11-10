@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
     }
     public static DataManager instance { get; private set; }
     public float coinAmount { get; private set; } = 0;
+    public float coinsGained = 0;
     private const string JsonFileName = "/save_data.json";
     private void Awake()
     {
@@ -23,8 +24,8 @@ public class DataManager : MonoBehaviour
     }
     public void AddToCoins(int amount)
     {
+        coinsGained = amount;
         coinAmount += amount;
-        Debug.Log(coinAmount);
     }
 
     public void SaveData()

@@ -9,3 +9,8 @@
 
 .hide {
 }
+
+.score-and-coin-containers {
+    margin-right: 66px;
+    margin-left: 66px;
+}
