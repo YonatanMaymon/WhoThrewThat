@@ -6,10 +6,10 @@ public static class UIConsts
     }
     public static class Menu
     {
-        public const string SecondaryContainerName = "SecondaryContainer";
+        public const string MenuContainerName = "MenuContainer";
         public const string MainContainerName = "MainContainer";
         public const string OrigamiManImageName = "OrigamiManImage";
-        public const string SecondaryContainerHiddenClass = "secondary-container-hidden";
+        public const string MenuContainerHiddenClass = "menu-container-hidden";
         public const string TintClass = "tint";
         public const string StartButtonName = "StartButton";
         public const string ShopButtonName = "ShopButton";

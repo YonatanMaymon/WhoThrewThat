@@ -1,7 +1,7 @@
 :root {
 }
 
-.secondary-container-hidden {
+.menu-container-hidden {
     left: auto;
     translate: -110% 0;
     display: flex;

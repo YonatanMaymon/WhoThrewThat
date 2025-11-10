@@ -7,7 +7,7 @@ using Consts = UIConsts.Menu;
 
 public class MenuUI : MonoBehaviour
 {
-    private VisualElement root, secondaryContainer;
+    private VisualElement root, MenuContainer;
     private Button startButton, shopButton, settingsButton, exitButton;
 
 
@@ -32,13 +32,13 @@ public class MenuUI : MonoBehaviour
     {
         root = GetComponent<UIDocument>().rootVisualElement;
 
-        secondaryContainer = root.Q<VisualElement>(Consts.SecondaryContainerName);
+        MenuContainer = root.Q<VisualElement>(Consts.MenuContainerName);
         startButton = root.Q<Button>(Consts.StartButtonName);
         shopButton = root.Q<Button>(Consts.ShopButtonName);
         settingsButton = root.Q<Button>(Consts.SettingsButtonName);
         exitButton = root.Q<Button>(Consts.ExitButtonName);
 
-        if (secondaryContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
+        if (MenuContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
             throw new InvalidOperationException("UI elements name is different the the ones defined in UIConsts");
     }
 
@@ -67,7 +67,7 @@ public class MenuUI : MonoBehaviour
     private IEnumerator DelayedShowMenu()
     {
         yield return new WaitForSeconds(1f);
-        secondaryContainer.RemoveFromClassList(Consts.SecondaryContainerHiddenClass);
+        MenuContainer.RemoveFromClassList(Consts.MenuContainerHiddenClass);
         TintBackground();
     }
     private void TintBackground()
