@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Menu/Components/SegmentedProgressBar/SegmentedProgressBarStyles.uss?fileID=7433441132597879392&amp;guid=9b89706f1a083404f8995f857599893d&amp;type=3#SegmentedProgressBarStyles" />
+    <ui:VisualElement name="ProgressbarRootContainer" style="flex-grow: 1; flex-direction: row; background-color: rgba(0, 0, 0, 0.7); border-left-color: rgba(72, 69, 69, 0.36); border-right-color: rgba(72, 69, 69, 0.36); border-top-color: rgba(72, 69, 69, 0.36); border-bottom-color: rgba(72, 69, 69, 0.36); border-top-width: 2.5px; border-right-width: 2.5px; border-bottom-width: 2.5px; border-left-width: 2.5px; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; padding-right: 0; padding-top: 1px; padding-bottom: 1px; padding-left: 0;">
+        <ui:VisualElement class="segment segment-fill" style="flex-grow: 1;" />
+        <ui:VisualElement class="segment segment-fill" style="flex-grow: 1;" />
+        <ui:VisualElement class="segment segment-fill" style="flex-grow: 1;" />
+        <ui:VisualElement class="segment segment-fill" style="flex-grow: 1;" />
+        <ui:VisualElement class="segment segment-fill" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
