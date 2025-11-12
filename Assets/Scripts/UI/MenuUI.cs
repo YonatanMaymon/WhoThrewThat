@@ -7,7 +7,7 @@ using static UIConsts.Menu;
 
 public class MenuUI : MonoBehaviour
 {
-    private VisualElement root, MenuContainer;
+    private VisualElement root, menuContainer, origamiManImage, shopContainer, settingsContainer;
     private Button startButton, shopButton, settingsButton, exitButton;
     private Shop shop;
 
@@ -34,15 +34,15 @@ public class MenuUI : MonoBehaviour
     {
         root = GetComponent<UIDocument>().rootVisualElement;
 
-        MenuContainer = root.Q<VisualElement>(MenuContainerName);
+        menuContainer = root.Q<VisualElement>(MenuContainerName);
+        origamiManImage = root.Q<VisualElement>(OrigamiManImageName);
+        shopContainer = root.Q<VisualElement>(ShopContainerName);
+        settingsContainer = root.Q<VisualElement>(SettingsContainerName);
         startButton = root.Q<Button>(StartButtonName);
         shopButton = root.Q<Button>(ShopButtonName);
         settingsButton = root.Q<Button>(SettingsButtonName);
         exitButton = root.Q<Button>(ExitButtonName);
         shop = root.Q<Shop>(ShopName);
-
-        if (MenuContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
-            throw new InvalidOperationException("UI elements name is different the the ones defined in UIConsts");
     }
 
 
@@ -54,7 +54,8 @@ public class MenuUI : MonoBehaviour
 
     private void OnShopClick()
     {
-        throw new NotImplementedException();
+        HideMenu();
+        shopContainer.RemoveFromClassList(ShopHiddenClass);
     }
 
     private void OnSettingClick()
@@ -70,9 +71,22 @@ public class MenuUI : MonoBehaviour
     private IEnumerator DelayedShowMenu()
     {
         yield return new WaitForSeconds(1f);
-        MenuContainer.RemoveFromClassList(MenuContainerHiddenClass);
+        ShowMenu();
         TintBackground();
     }
+
+    private void ShowMenu()
+    {
+        menuContainer.RemoveFromClassList(MenuContainerHiddenClass);
+        origamiManImage.RemoveFromClassList(OrigamiManHiddenClass);
+    }
+
+    private void HideMenu()
+    {
+        menuContainer.AddToClassList(MenuContainerHiddenClass);
+        origamiManImage.AddToClassList(OrigamiManHiddenClass);
+    }
+
     private void TintBackground()
     {
         VisualElement mainContainer = root.Q<VisualElement>(MainContainerName);

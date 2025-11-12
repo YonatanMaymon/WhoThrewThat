@@ -8,15 +8,19 @@ public static class UIConsts
     {
         public const string
         MenuContainerName = "MenuContainer",
+        ShopContainerName = "ShopContainer",
+        SettingsContainerName = "SettingsContainer",
         MainContainerName = "MainContainer",
         OrigamiManImageName = "OrigamiManImage",
-        MenuContainerHiddenClass = "menu-container-hidden",
-        TintClass = "tint",
         StartButtonName = "StartButton",
         ShopButtonName = "ShopButton",
         SettingsButtonName = "SettingsButton",
         ExitButtonName = "ExitButton",
-        ShopName = "Shop";
+        ShopName = "Shop",
+        MenuContainerHiddenClass = "menu-container-hidden",
+        OrigamiManHiddenClass = "origami-man-hidden",
+        TintClass = "tint",
+        ShopHiddenClass = "shop-hidden";
     }
     public static class Game
     {
