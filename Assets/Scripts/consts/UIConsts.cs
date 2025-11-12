@@ -15,6 +15,7 @@ public static class UIConsts
         public const string ShopButtonName = "ShopButton";
         public const string SettingsButtonName = "SettingsButton";
         public const string ExitButtonName = "ExitButton";
+        public const string ShopName = "Shop";
     }
     public static class Game
     {

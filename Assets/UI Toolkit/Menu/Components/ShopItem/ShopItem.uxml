@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Menu/Components/ShopItem/ShopItemStyles.uss?fileID=7433441132597879392&amp;guid=69c08a019291d2149ab389db76f95b91&amp;type=3#ShopItemStyles" />
     <Style src="project://database/Assets/UI%20Toolkit/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=f3489685772faab4fae080381bc695f8&amp;type=3#GeneralStyles" />
-    <ui:VisualElement name="ItemContainer" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Assets/pics/wood%20plank.png?fileID=2800000&amp;guid=a37a25c72a20bf541b6e70519a7f8756&amp;type=3#wood plank&quot;); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-direction: row; padding-top: 14px; padding-right: 14px; padding-bottom: 14px; padding-left: 14px;">
+    <ui:VisualElement name="ShopItemRoot" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Assets/pics/wood%20plank.png?fileID=2800000&amp;guid=a37a25c72a20bf541b6e70519a7f8756&amp;type=3#wood plank&quot;); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-direction: row; padding-top: 14px; padding-right: 14px; padding-bottom: 14px; padding-left: 14px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(130, 85, 52); border-right-color: rgb(130, 85, 52); border-top-color: rgb(130, 85, 52); border-bottom-color: rgb(130, 85, 52);">
         <ui:VisualElement name="ItemDataImageContainer" style="flex-grow: 0; flex-direction: row; flex-shrink: 0; width: 60%;">
             <ui:VisualElement name="ItemImage" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Assets/pics/icons/strength.png?fileID=2800000&amp;guid=86ff616b6df18494ebe0374d2b341fb4&amp;type=3#strength&quot;); flex-shrink: 0; -unity-background-scale-mode: scale-to-fit; background-position-y: top 0; background-position-x: left 0; align-self: auto; align-items: flex-start; width: 100px; height: 100%;" />
             <ui:VisualElement name="ItemDataContainer" style="flex-grow: 1; margin-left: 10px; align-self: center; justify-content: space-around; align-content: auto; height: 100%;">
@@ -11,7 +11,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="PriceContainer" style="flex-grow: 1; align-self: center; align-content: center; justify-content: flex-start; align-items: auto;">
-            <ui:Button text="Upgrade (50 Coins)" class="button text" style="width: 85%; height: auto; font-size: 20px; align-self: flex-end; justify-content: flex-start; align-content: flex-start;" />
+            <ui:Button text="Upgrade (50 Coins)" name="UpgradeButton" class="button text" style="width: 85%; height: auto; font-size: 20px; align-self: flex-end; justify-content: flex-start; align-content: flex-start;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

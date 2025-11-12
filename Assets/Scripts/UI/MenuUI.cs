@@ -9,11 +9,13 @@ public class MenuUI : MonoBehaviour
 {
     private VisualElement root, MenuContainer;
     private Button startButton, shopButton, settingsButton, exitButton;
+    private Shop shop;
 
 
     private void Awake()
     {
         AssignVariables();
+        shop.LoadItems();
     }
     private void OnEnable()
     {
@@ -37,6 +39,7 @@ public class MenuUI : MonoBehaviour
         shopButton = root.Q<Button>(Consts.ShopButtonName);
         settingsButton = root.Q<Button>(Consts.SettingsButtonName);
         exitButton = root.Q<Button>(Consts.ExitButtonName);
+        shop = root.Q<Shop>(Consts.ShopName);
 
         if (MenuContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
             throw new InvalidOperationException("UI elements name is different the the ones defined in UIConsts");

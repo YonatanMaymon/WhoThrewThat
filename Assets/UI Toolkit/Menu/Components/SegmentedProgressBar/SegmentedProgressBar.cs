@@ -1,8 +1,6 @@
 using UnityEngine.UIElements;
 using UnityEditor;
 using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
 
 [UxmlElement]
 public partial class SegmentedProgressBar : VisualElement
