@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd7043cdc51b0b34991bd8256984a488, type: 3}
-  m_Name: GoldGain
+  m_Name: 1-Strength
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemData
-  image: {fileID: 2800000, guid: b413aa61e54cd8746ada2ab033b4ab5b, type: 3}
-  statName: GoldGain
+  image: {fileID: 2800000, guid: 86ff616b6df18494ebe0374d2b341fb4, type: 3}
+  statName: Strength
   maxLevel: 5
   upgradeCosts: 1400000023000000320000004b00000064000000

@@ -66,7 +66,7 @@ public partial class ShopItem : VisualElement
         else
         {
             upgradePrice = _data.upgradeCosts[levelCostIndex];
-            upgradeButton.text = $"Upgrade ({upgradePrice})";
+            upgradeButton.text = $"Upgrade ({upgradePrice} Coins)";
         }
     }
 }

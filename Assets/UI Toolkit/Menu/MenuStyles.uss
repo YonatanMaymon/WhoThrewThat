@@ -15,4 +15,5 @@
 
 .shop-hidden {
     opacity: 0;
+    display: none;
 }
