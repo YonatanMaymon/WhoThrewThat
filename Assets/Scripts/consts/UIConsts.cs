@@ -6,25 +6,27 @@ public static class UIConsts
     }
     public static class Menu
     {
-        public const string MenuContainerName = "MenuContainer";
-        public const string MainContainerName = "MainContainer";
-        public const string OrigamiManImageName = "OrigamiManImage";
-        public const string MenuContainerHiddenClass = "menu-container-hidden";
-        public const string TintClass = "tint";
-        public const string StartButtonName = "StartButton";
-        public const string ShopButtonName = "ShopButton";
-        public const string SettingsButtonName = "SettingsButton";
-        public const string ExitButtonName = "ExitButton";
-        public const string ShopName = "Shop";
+        public const string
+        MenuContainerName = "MenuContainer",
+        MainContainerName = "MainContainer",
+        OrigamiManImageName = "OrigamiManImage",
+        MenuContainerHiddenClass = "menu-container-hidden",
+        TintClass = "tint",
+        StartButtonName = "StartButton",
+        ShopButtonName = "ShopButton",
+        SettingsButtonName = "SettingsButton",
+        ExitButtonName = "ExitButton",
+        ShopName = "Shop";
     }
     public static class Game
     {
-        public const string UpdatingScoreName = "UpdatingScore";
-        public const string FinalScoreName = "FinalScore";
-        public const string CoinAmountName = "CoinAmount";
-        public const string GameOverUIContainerName = "GameOverUIContainer";
-        public const string RestartButtonName = "RestartButton";
-        public const string MenuButtonName = "MenuButton";
-        public const string HideClass = "hide";
+        public const string
+        UpdatingScoreName = "UpdatingScore",
+        FinalScoreName = "FinalScore",
+        CoinAmountName = "CoinAmount",
+        GameOverUIContainerName = "GameOverUIContainer",
+        RestartButtonName = "RestartButton",
+        MenuButtonName = "MenuButton",
+        HideClass = "hide";
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using Consts = UIConsts.Menu;
+using static UIConsts.Menu;
 
 public class MenuUI : MonoBehaviour
 {
@@ -34,12 +34,12 @@ public class MenuUI : MonoBehaviour
     {
         root = GetComponent<UIDocument>().rootVisualElement;
 
-        MenuContainer = root.Q<VisualElement>(Consts.MenuContainerName);
-        startButton = root.Q<Button>(Consts.StartButtonName);
-        shopButton = root.Q<Button>(Consts.ShopButtonName);
-        settingsButton = root.Q<Button>(Consts.SettingsButtonName);
-        exitButton = root.Q<Button>(Consts.ExitButtonName);
-        shop = root.Q<Shop>(Consts.ShopName);
+        MenuContainer = root.Q<VisualElement>(MenuContainerName);
+        startButton = root.Q<Button>(StartButtonName);
+        shopButton = root.Q<Button>(ShopButtonName);
+        settingsButton = root.Q<Button>(SettingsButtonName);
+        exitButton = root.Q<Button>(ExitButtonName);
+        shop = root.Q<Shop>(ShopName);
 
         if (MenuContainer == null || startButton == null || shopButton == null || settingsButton == null || exitButton == null)
             throw new InvalidOperationException("UI elements name is different the the ones defined in UIConsts");
@@ -70,13 +70,13 @@ public class MenuUI : MonoBehaviour
     private IEnumerator DelayedShowMenu()
     {
         yield return new WaitForSeconds(1f);
-        MenuContainer.RemoveFromClassList(Consts.MenuContainerHiddenClass);
+        MenuContainer.RemoveFromClassList(MenuContainerHiddenClass);
         TintBackground();
     }
     private void TintBackground()
     {
-        VisualElement mainContainer = root.Q<VisualElement>(Consts.MainContainerName);
-        mainContainer.AddToClassList(Consts.TintClass);
+        VisualElement mainContainer = root.Q<VisualElement>(MainContainerName);
+        mainContainer.AddToClassList(TintClass);
     }
     private void OnDisable()
     {

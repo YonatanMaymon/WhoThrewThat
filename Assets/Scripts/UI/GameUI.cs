@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using Consts = UIConsts.Game;
+using static UIConsts.Game;
 
 public class GameUI : MonoBehaviour
 {
@@ -28,19 +28,19 @@ public class GameUI : MonoBehaviour
     {
         finalScoreLabel.text = "" + _score;
         coinAmountLabel.text = "" + DataManager.instance.coinsGained;
-        updatingScoreLabel.AddToClassList(Consts.HideClass);
-        gameOverUIContainer.RemoveFromClassList(Consts.HideClass);
+        updatingScoreLabel.AddToClassList(HideClass);
+        gameOverUIContainer.RemoveFromClassList(HideClass);
     }
 
     private void AssignVariables()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
-        gameOverUIContainer = root.Q<VisualElement>(Consts.GameOverUIContainerName);
-        updatingScoreLabel = root.Q<Label>(Consts.UpdatingScoreName);
-        finalScoreLabel = root.Q<Label>(Consts.FinalScoreName);
-        coinAmountLabel = root.Q<Label>(Consts.CoinAmountName);
-        restartButton = root.Q<Button>(Consts.RestartButtonName);
-        menuButton = root.Q<Button>(Consts.MenuButtonName);
+        gameOverUIContainer = root.Q<VisualElement>(GameOverUIContainerName);
+        updatingScoreLabel = root.Q<Label>(UpdatingScoreName);
+        finalScoreLabel = root.Q<Label>(FinalScoreName);
+        coinAmountLabel = root.Q<Label>(CoinAmountName);
+        restartButton = root.Q<Button>(RestartButtonName);
+        menuButton = root.Q<Button>(MenuButtonName);
 
         if (gameOverUIContainer == null || updatingScoreLabel == null || finalScoreLabel == null || coinAmountLabel == null || restartButton == null || menuButton == null)
             throw new InvalidOperationException("UI elements name is different the the ones defined in UIConsts");
