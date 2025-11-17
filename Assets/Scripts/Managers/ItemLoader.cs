@@ -5,6 +5,7 @@ public class ItemLoader : MonoBehaviour
 {
     public static ItemLoader instance { get; private set; }
     public List<ShopItemData> allShopItems { get; private set; }
+    public Dictionary<Enums.STATS, float> statsEffectiveness { get; private set; } = new();
 
     void Awake()
     {
@@ -24,7 +25,9 @@ public class ItemLoader : MonoBehaviour
     {
         // Load from the "Resources/ShopItems" folder
         allShopItems = new List<ShopItemData>(Resources.LoadAll<ShopItemData>("ShopItems"));
-
-        Debug.Log($"Loaded {allShopItems.Count} items.");
+        foreach (var item in allShopItems)
+        {
+            statsEffectiveness.Add(item.stat, item.upgradeEffectiveness);
+        }
     }
 }

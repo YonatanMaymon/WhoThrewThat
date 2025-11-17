@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static event Action<int> onScoreUpdate;
-    private const int ScoreForCoin = 25;
+    private const float baseCoinPerScore = 1f / 25f;
     private int _score = 0;
 
     private void Start()
@@ -20,7 +20,14 @@ public class ScoreManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        DataManager.instance.IncrementCoins(_score / ScoreForCoin);
+        GameManager gameManager = GameManager.instance;
+
+        float coinPerScore = gameManager != null ?
+            baseCoinPerScore * gameManager.statsEffectivenessModerator[Enums.STATS.COIN_GAIN]
+            :
+            baseCoinPerScore;
+        int coinsGained = (int)(_score * coinPerScore);
+        DataManager.instance.IncrementCoins(coinsGained);
     }
 
     private void AddScore(int score)

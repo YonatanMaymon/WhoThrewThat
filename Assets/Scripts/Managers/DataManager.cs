@@ -19,8 +19,8 @@ public class DataManager : MonoBehaviour
         public List<StatLevel> statsLevels = new();
     }
     private const string JsonFileName = "/save_data.json";
-
     public static DataManager instance { get; private set; }
+    public static event Action onStatsUpdate;
     public Dictionary<Enums.STATS, int> statsLevels = new();
 
     public int coinAmount { get; private set; } = 0;
@@ -44,6 +44,7 @@ public class DataManager : MonoBehaviour
             return;
         statsLevels[shopItem.statType]++;
         coinAmount -= shopItem.upgradePrice;
+        onStatsUpdate?.Invoke();
     }
 
     public void IncrementCoins(int amount)
@@ -84,5 +85,6 @@ public class DataManager : MonoBehaviour
         {
             statsLevels[item.stat] = item.level;
         }
+        onStatsUpdate?.Invoke();
     }
 }

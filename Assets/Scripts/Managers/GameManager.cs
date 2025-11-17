@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     public static event Action onGameOver;
     public static float ScreenBufferX = 0.05f;
+    public Dictionary<Enums.STATS, float> statsEffectivenessModerator { get; private set; } = new();
+
     public float gravityModerator = 1f;
     private void Awake()
     {
@@ -17,14 +21,31 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    private void OnEnable()
+    {
+        DataManager.onStatsUpdate += UpdateStatsEffectiveness;
+        PlayerController.onScissorsCatch += OnGameOver;
+    }
 
     void Start()
     {
         Physics.gravity *= gravityModerator;
-        PlayerController.onScissorsCatch += OnGameOver;
     }
 
+    public void UpdateStatsEffectiveness()
+    {
+        DataManager dataManager = DataManager.instance;
+        ItemLoader itemLoader = ItemLoader.instance;
 
+        if (dataManager == null || itemLoader == null)
+            throw new WarningException("no DataManager or ItemLoader, stats are inactive");
+
+        foreach (var stat in dataManager.statsLevels)
+        {
+            float statEffectivenessPerUpgrade = itemLoader.statsEffectiveness[stat.Key];
+            statsEffectivenessModerator[stat.Key] = 1 + stat.Value * statEffectivenessPerUpgrade / 100;
+        }
+    }
 
     public void ExitGame()
     {
@@ -45,6 +66,7 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerController.onScissorsCatch -= OnGameOver;
+        DataManager.onStatsUpdate -= UpdateStatsEffectiveness;
     }
 
 }
