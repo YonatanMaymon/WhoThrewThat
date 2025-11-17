@@ -36,14 +36,14 @@ public class GameManager : MonoBehaviour
     {
         DataManager dataManager = DataManager.instance;
         ItemLoader itemLoader = ItemLoader.instance;
-
         if (dataManager == null || itemLoader == null)
             throw new WarningException("no DataManager or ItemLoader, stats are inactive");
 
         foreach (var stat in dataManager.statsLevels)
         {
             float statEffectivenessPerUpgrade = itemLoader.statsEffectiveness[stat.Key];
-            statsEffectivenessModerator[stat.Key] = 1 + stat.Value * statEffectivenessPerUpgrade / 100;
+            float statModerator = 1 + statEffectivenessPerUpgrade / 100;
+            statsEffectivenessModerator[stat.Key] = Mathf.Pow(statModerator, stat.Value);
         }
     }
 

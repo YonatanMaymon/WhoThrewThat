@@ -9,14 +9,17 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 {
     public static event Action onScissorsCatch;
     public static event Action<int> onOrigamiCatch;
-    public float force = 10f;
-    public float holdTime = 0.2f;
+    [SerializeField]
+    private float baseForce = 100f, baseGripTime = 0.2f;
+    private float force, gripTime;
     private Rigidbody Rb;
     private bool isPointerDown = false;
 
     void Start()
     {
         Rb = GetComponent<Rigidbody>();
+        force = baseForce * GameManager.instance.statsEffectivenessModerator[Enums.STATS.STRENGTH];
+        gripTime = baseGripTime * GameManager.instance.statsEffectivenessModerator[Enums.STATS.GRIP];
     }
 
     private void Update()
@@ -81,7 +84,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     IEnumerator releaseTimeoutCoroutine()
     {
-        yield return new WaitForSeconds(holdTime);
+        yield return new WaitForSeconds(gripTime);
         isPointerDown = false;
     }
 }

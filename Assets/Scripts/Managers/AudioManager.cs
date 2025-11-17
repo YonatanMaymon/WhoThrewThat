@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioManager instance;
     public AudioClip[] gameMusic;
     public AudioClip menuMusic, gameOverAudio, OrigamiCatchAudio, ScissorsSpawnAudio, buttonClick;
     public AudioSettings audioSettings;
@@ -12,6 +13,12 @@ public class AudioManager : MonoBehaviour
     private Coroutine musicCoroutine;
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
     private void OnEnable()

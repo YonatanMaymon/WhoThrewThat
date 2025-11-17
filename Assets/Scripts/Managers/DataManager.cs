@@ -37,6 +37,10 @@ public class DataManager : MonoBehaviour
         LoadDefaultData();
         LoadData();
     }
+    private void OnEnable()
+    {
+        onStatsUpdate?.Invoke();
+    }
 
     public void UpgradeStat(ShopItem shopItem)
     {
@@ -85,6 +89,5 @@ public class DataManager : MonoBehaviour
         {
             statsLevels[item.stat] = item.level;
         }
-        onStatsUpdate?.Invoke();
     }
 }
