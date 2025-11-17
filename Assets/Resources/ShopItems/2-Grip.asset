@@ -15,5 +15,6 @@ MonoBehaviour:
   image: {fileID: 2800000, guid: 76b6d222fb0c9a24091c9565dc133619, type: 3}
   statName: Grip
   stat: 1
+  upgradeEffectiveness: 50
   maxLevel: 5
   upgradeCosts: 1400000023000000320000004b00000064000000
