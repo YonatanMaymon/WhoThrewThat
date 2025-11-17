@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        DataManager.instance.AddToCoins(_score / ScoreForCoin);
+        DataManager.instance.IncrementCoins(_score / ScoreForCoin);
     }
 
     private void AddScore(int score)

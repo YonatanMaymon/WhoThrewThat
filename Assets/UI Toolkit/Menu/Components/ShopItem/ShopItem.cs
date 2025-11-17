@@ -6,7 +6,9 @@ using static ShopItemConsts;
 [UxmlElement]
 public partial class ShopItem : VisualElement
 {
-    public float upgradePrice { get; private set; } = 0;
+    public int upgradePrice { get; private set; } = 0;
+    public Enums.STATS statType { get; private set; }
+    private Action m_CachedClickListener;
     private VisualTreeAsset m_VisualTreeAsset;
     private SegmentedProgressBar progressBar;
     private Label levelLabel;
@@ -31,12 +33,27 @@ public partial class ShopItem : VisualElement
         this.Q<VisualElement>(ImageContainerName).style.backgroundImage = data.image;
         this.Q<Label>(StatNameLabelName).text = data.statName;
         _data = data;
+        statType = data.stat;
         SetMaxLevel();
     }
 
-    public void SubscribeToUpgradeClick(Action action)
+    public void SubscribeToUpgradeClick(Action<ShopItem> action)
     {
-        upgradeButton.clicked += action;
+        if (m_CachedClickListener != null)
+        {
+            upgradeButton.clicked -= m_CachedClickListener;
+        }
+        m_CachedClickListener = () => action(this);
+        upgradeButton.clicked += m_CachedClickListener;
+    }
+
+    public void UnsubscribeFromUpgradeClick()
+    {
+        if (upgradeButton != null && m_CachedClickListener != null)
+        {
+            upgradeButton.clicked -= m_CachedClickListener;
+            m_CachedClickListener = null;
+        }
     }
 
     private void SetMaxLevel()
@@ -45,7 +62,7 @@ public partial class ShopItem : VisualElement
         UpdateLevel(0);
     }
 
-    private void UpdateLevel(int level)
+    public void UpdateLevel(int level)
     {
         level = Mathf.Clamp(level, 0, _data.maxLevel);
         progressBar.UpdateProgress(level);
@@ -60,7 +77,7 @@ public partial class ShopItem : VisualElement
 
         if (level == _data.maxLevel)
         {
-            upgradePrice = Mathf.Infinity;
+            upgradePrice = int.MaxValue;
             upgradeButton.text = "Maxed Out";
         }
         else

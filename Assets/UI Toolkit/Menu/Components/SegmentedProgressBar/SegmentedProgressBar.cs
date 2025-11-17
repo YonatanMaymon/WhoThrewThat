@@ -7,8 +7,6 @@ public partial class SegmentedProgressBar : VisualElement
 {
     private const string UxmlPath = "Assets/UI Toolkit/Menu/Components/SegmentedProgressBar/SegmentedProgressBar.uxml";
     private VisualTreeAsset m_VisualTreeAsset;
-
-    // Use a reference to the root element for adding/removing children
     private VisualElement m_ProgressBarRoot;
     private List<VisualElement> m_ProgressSegments = new List<VisualElement>();
 
@@ -16,12 +14,9 @@ public partial class SegmentedProgressBar : VisualElement
     {
         m_VisualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UxmlPath);
         m_VisualTreeAsset.CloneTree(this);
-
-        // Get the root container reference
         m_ProgressBarRoot = this.Q<VisualElement>("ProgressbarRootContainer");
     }
 
-    // NEW PUBLIC METHOD: Call this once when you set the upgrade data
     public void SetMaxLevel(int maxLevel)
     {
         // 1. Clear any existing segments

@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
 
 [UxmlElement]
 public partial class Shop : VisualElement
 {
+    public List<ShopItem> items { get; private set; } = new();
     private const string UxmlPath = "Assets/UI Toolkit/Menu/Components/Shop/Shop.uxml",
     ShopScrollViewName = "ShopScrollView";
     private VisualTreeAsset m_VisualTreeAsset;
@@ -19,7 +21,17 @@ public partial class Shop : VisualElement
         ScrollView shopScrollView = this.Q<ScrollView>(ShopScrollViewName);
         foreach (ShopItemData item in ItemLoader.instance.allShopItems)
         {
-            shopScrollView.Add(new ShopItem(item));
+            ShopItem shopItem = new ShopItem(item);
+            items.Add(shopItem);
+            shopScrollView.Add(shopItem);
+        }
+    }
+
+    public void UpdateLevels(Dictionary<Enums.STATS, int> statsLevels)
+    {
+        foreach (var item in items)
+        {
+            item.UpdateLevel(statsLevels[item.statType]);
         }
     }
 }

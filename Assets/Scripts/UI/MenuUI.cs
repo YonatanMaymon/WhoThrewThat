@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -10,7 +11,6 @@ public class MenuUI : MonoBehaviour
     private VisualElement root, menuContainer, origamiManImage, shopContainer, settingsContainer;
     private Button startButton, shopButton, settingsButton, exitButton;
     private Shop shop;
-
 
     private void Awake()
     {
@@ -23,6 +23,19 @@ public class MenuUI : MonoBehaviour
         settingsButton.clicked += OnSettingClick;
         shopButton.clicked += OnShopClick;
         exitButton.clicked += OnExitClick;
+        foreach (var item in shop.items)
+        {
+            item.SubscribeToUpgradeClick(OnUpgradeClick);
+        }
+    }
+
+    private void OnUpgradeClick(ShopItem item)
+    {
+        DataManager dataManager = DataManager.instance;
+        if (dataManager == null)
+            throw new FileLoadException("DataManager not Loaded for some reason");
+        dataManager.UpgradeStat(item);
+        shop.UpdateLevels(dataManager.statsLevels);
     }
 
     private void Start()
@@ -44,8 +57,6 @@ public class MenuUI : MonoBehaviour
         exitButton = root.Q<Button>(ExitButtonName);
         shop = root.Q<Shop>(ShopName);
     }
-
-
 
     private void OnStartClick()
     {
@@ -98,5 +109,9 @@ public class MenuUI : MonoBehaviour
         settingsButton.clicked -= OnSettingClick;
         shopButton.clicked -= OnShopClick;
         exitButton.clicked -= OnExitClick;
+        foreach (var item in shop.items)
+        {
+            item.UnsubscribeFromUpgradeClick();
+        }
     }
 }

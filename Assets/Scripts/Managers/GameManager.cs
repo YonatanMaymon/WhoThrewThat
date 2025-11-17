@@ -23,9 +23,12 @@ public class GameManager : MonoBehaviour
         Physics.gravity *= gravityModerator;
         PlayerController.onScissorsCatch += OnGameOver;
     }
+
+
+
     public void ExitGame()
     {
-        DataManager.instance.SaveData();
+        DataManager.instance?.SaveData();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
