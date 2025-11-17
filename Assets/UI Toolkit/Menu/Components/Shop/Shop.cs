@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
@@ -5,10 +6,16 @@ using UnityEngine.UIElements;
 [UxmlElement]
 public partial class Shop : VisualElement
 {
-    public List<ShopItem> items { get; private set; } = new();
     private const string UxmlPath = "Assets/UI Toolkit/Menu/Components/Shop/Shop.uxml",
-    ShopScrollViewName = "ShopScrollView";
+    ShopScrollViewName = "ShopScrollView",
+    BackButtonName = "BackButton",
+    CoinCounterLabelName = "CoinCounterLabel";
+
+    public List<ShopItem> items { get; private set; } = new();
+
     private VisualTreeAsset m_VisualTreeAsset;
+    private Button backButton;
+    private Label coinCounterLabel;
 
     public Shop()
     {
@@ -25,13 +32,27 @@ public partial class Shop : VisualElement
             items.Add(shopItem);
             shopScrollView.Add(shopItem);
         }
+        backButton = this.Q<Button>(BackButtonName);
+        coinCounterLabel = this.Q<Label>(CoinCounterLabelName);
     }
 
-    public void UpdateLevels(Dictionary<Enums.STATS, int> statsLevels)
+
+    public void SubscribeToBackClick(Action action)
+    {
+        backButton.clicked += action;
+    }
+
+    public void UnsubscribeFromBackClick(Action action)
+    {
+        backButton.clicked -= action;
+    }
+
+    public void UpdateShop(Dictionary<Enums.STATS, int> statsLevels, int coins)
     {
         foreach (var item in items)
         {
             item.UpdateLevel(statsLevels[item.statType]);
         }
+        coinCounterLabel.text = coins + "";
     }
 }

@@ -27,6 +27,15 @@ public class MenuUI : MonoBehaviour
         {
             item.SubscribeToUpgradeClick(OnUpgradeClick);
         }
+        shop.SubscribeToBackClick(HideShop);
+    }
+
+    private void Start()
+    {
+        DataManager dataManager = DataManager.instance;
+        shop.UpdateShop(dataManager.statsLevels, dataManager.coinAmount);
+
+        StartCoroutine(DelayedShowMenu(1));
     }
 
     private void OnUpgradeClick(ShopItem item)
@@ -35,12 +44,7 @@ public class MenuUI : MonoBehaviour
         if (dataManager == null)
             throw new FileLoadException("DataManager not Loaded for some reason");
         dataManager.UpgradeStat(item);
-        shop.UpdateLevels(dataManager.statsLevels);
-    }
-
-    private void Start()
-    {
-        StartCoroutine(DelayedShowMenu());
+        shop.UpdateShop(dataManager.statsLevels, dataManager.coinAmount);
     }
 
     private void AssignVariables()
@@ -68,6 +72,11 @@ public class MenuUI : MonoBehaviour
         HideMenu();
         shopContainer.RemoveFromClassList(ShopHiddenClass);
     }
+    private void HideShop()
+    {
+        shopContainer.AddToClassList(ShopHiddenClass);
+        StartCoroutine(DelayedShowMenu(0.3f));
+    }
 
     private void OnSettingClick()
     {
@@ -79,9 +88,9 @@ public class MenuUI : MonoBehaviour
         GameManager.instance.ExitGame();
     }
 
-    private IEnumerator DelayedShowMenu()
+    private IEnumerator DelayedShowMenu(float sec)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(sec);
         ShowMenu();
         TintBackground();
     }
@@ -101,7 +110,8 @@ public class MenuUI : MonoBehaviour
     private void TintBackground()
     {
         VisualElement mainContainer = root.Q<VisualElement>(MainContainerName);
-        mainContainer.AddToClassList(TintClass);
+        if (!mainContainer.ClassListContains(TintClass))
+            mainContainer.AddToClassList(TintClass);
     }
     private void OnDisable()
     {
@@ -113,5 +123,6 @@ public class MenuUI : MonoBehaviour
         {
             item.UnsubscribeFromUpgradeClick();
         }
+        shop.UnsubscribeFromBackClick(HideShop);
     }
 }

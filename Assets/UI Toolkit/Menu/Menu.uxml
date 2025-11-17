@@ -15,9 +15,9 @@
                 <ui:Button text="Exit" name="ExitButton" class="button text" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="ShopContainer" enabled="true" class="shop-hidden" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; transition-property: opacity, visibility; transition-timing-function: ease-out, ease; transition-delay: 0s, 0s; justify-content: center; align-items: flex-start; align-self: flex-start; transition-duration: 2s, 0s;">
+            <Shop name="Shop" style="flex-grow: 1; width: 100%; height: 100%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="SettingsContainer" enabled="true" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 100%; height: 100%;" />
     </ui:VisualElement>
-    <ui:VisualElement name="ShopContainer" enabled="true" class="shop-hidden" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; transition-property: opacity, visibility; transition-timing-function: ease-out, ease; transition-delay: 1s, 0s; justify-content: center; align-items: flex-start; align-self: flex-start; transition-duration: 2s, 0s;">
-        <Shop name="Shop" style="flex-grow: 1; width: 100%; height: 100%;" />
-    </ui:VisualElement>
-    <ui:VisualElement name="SettingsContainer" enabled="true" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 100%; height: 100%;" />
 </ui:UXML>

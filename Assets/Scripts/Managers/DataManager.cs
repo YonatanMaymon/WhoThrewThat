@@ -79,11 +79,7 @@ public class DataManager : MonoBehaviour
 
         string json = File.ReadAllText(savePath);
         GameData data = JsonUtility.FromJson<GameData>(json);
-
-        // FOR TESTING
-        // coinAmount = data.coins;
-        coinAmount = 1000;
-
+        coinAmount = data.coins;
         foreach (var item in data.statsLevels)
         {
             statsLevels[item.stat] = item.level;
