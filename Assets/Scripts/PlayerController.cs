@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
-public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class PlayerController : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
     public static event Action onScissorsCatch;
     public static event Action<int> onOrigamiCatch;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     private float baseForce = 100f, baseGripTime = 0.2f;
     private float force, gripTime;
     private Rigidbody Rb;
-    private bool isPointerDown = false;
+    private bool hasGrip = false;
 
     void Start()
     {
@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     private void Update()
     {
-        MoveOnDrag();
         KeepOnScreen();
     }
 
@@ -42,20 +41,6 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             Rb.linearVelocity = new Vector3(Rb.linearVelocity.x, 0, 0);
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }
-    private void MoveOnDrag()
-    {
-        if (isPointerDown)
-        {
-            Vector2 mousePos = Mouse.current.position.ReadValue();
-            // Convert to world space
-            Vector3 mouseWorldPos = VectorUtils.GetWorldSpacePos(mousePos.x, mousePos.y);
-            Vector3 directionVector = mouseWorldPos - transform.position;
-            Vector3 direction = directionVector.normalized;
-            float magnitude = directionVector.magnitude;
-            // add force in that direction
-            Rb.linearVelocity = direction * magnitude * force * Time.deltaTime;
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -71,20 +56,30 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         Destroy(other.gameObject);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        isPointerDown = true;
+        hasGrip = true;
         StartCoroutine(releaseTimeoutCoroutine());
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
-        isPointerDown = false;
+        if (hasGrip)
+        {
+            // Convert to world space
+            Vector3 worldPos = VectorUtils.GetWorldSpacePos(eventData.position.x, eventData.position.y);
+            Vector3 directionVector = worldPos - transform.position;
+            Vector3 direction = directionVector.normalized;
+            float magnitude = directionVector.magnitude;
+            // add force in that direction
+            Rb.linearVelocity = direction * magnitude * force * Time.deltaTime;
+        }
     }
 
     IEnumerator releaseTimeoutCoroutine()
     {
         yield return new WaitForSeconds(gripTime);
-        isPointerDown = false;
+        hasGrip = false;
     }
+
 }
