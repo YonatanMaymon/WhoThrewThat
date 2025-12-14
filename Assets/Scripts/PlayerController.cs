@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IBeginDragHandler, IDragHandler
     public static event Action onScissorsCatch;
     public static event Action<int> onOrigamiCatch;
     [SerializeField]
-    private float baseForce = 100f, baseGripTime = 0.2f;
+    private float baseForce = 50f, baseGripTime = 0.2f;
     private float force, gripTime;
     private Rigidbody Rb;
     private bool hasGrip = false;

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75481be343fe8de418359f54c27d7278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  baseForce: 100
+  baseForce: 50
   baseGripTime: 0.2
 --- !u!54 &3667401336231147818
 Rigidbody:
@@ -97,8 +97,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8, y: 0.04, z: 0.47}
-  m_Center: {x: 0, y: 0.24, z: 0}
+  m_Size: {x: 1, y: 0.3, z: 0.6}
+  m_Center: {x: 0, y: 0.17, z: 0}
 --- !u!65 &5627286928750789541
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,8 +118,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8, y: 0.19, z: 0.47}
-  m_Center: {x: 0, y: 0.12355769, z: 0}
+  m_Size: {x: 0.8, y: 0.04, z: 0.47}
+  m_Center: {x: 0, y: 0.02, z: 0}
 --- !u!33 &6437647313936906639
 MeshFilter:
   m_ObjectHideFlags: 0
