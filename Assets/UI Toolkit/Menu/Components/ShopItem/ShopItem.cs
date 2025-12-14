@@ -17,7 +17,7 @@ public partial class ShopItem : VisualElement
 
     public ShopItem()
     {
-        m_VisualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UxmlPath);
+        m_VisualTreeAsset = Resources.Load<VisualTreeAsset>(UxmlPath);
         m_VisualTreeAsset.CloneTree(this);
         progressBar = this.Q<SegmentedProgressBar>(ProgressBarName);
         levelLabel = this.Q<Label>(LevelLabelName);

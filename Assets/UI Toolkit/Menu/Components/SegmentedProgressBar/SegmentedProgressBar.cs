@@ -1,18 +1,19 @@
 using UnityEngine.UIElements;
 using UnityEditor;
 using System.Collections.Generic;
+using UnityEngine;
 
 [UxmlElement]
 public partial class SegmentedProgressBar : VisualElement
 {
-    private const string UxmlPath = "Assets/UI Toolkit/Menu/Components/SegmentedProgressBar/SegmentedProgressBar.uxml";
+    private const string UxmlPath = "Menus/SegmentedProgressBar/SegmentedProgressBar";
     private VisualTreeAsset m_VisualTreeAsset;
     private VisualElement m_ProgressBarRoot;
     private List<VisualElement> m_ProgressSegments = new List<VisualElement>();
 
     public SegmentedProgressBar()
     {
-        m_VisualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UxmlPath);
+        m_VisualTreeAsset = Resources.Load<VisualTreeAsset>(UxmlPath);
         m_VisualTreeAsset.CloneTree(this);
         m_ProgressBarRoot = this.Q<VisualElement>("ProgressbarRootContainer");
     }

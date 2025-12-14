@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 [UxmlElement]
 public partial class Shop : VisualElement
 {
-    private const string UxmlPath = "Assets/UI Toolkit/Menu/Components/Shop/Shop.uxml",
+    private const string UxmlPath = "Menus/Shop/Shop",
     ShopScrollViewName = "ShopScrollView",
     BackButtonName = "BackButton",
     CoinCounterLabelName = "CoinCounterLabel";
@@ -19,7 +20,7 @@ public partial class Shop : VisualElement
 
     public Shop()
     {
-        m_VisualTreeAsset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UxmlPath);
+        m_VisualTreeAsset = Resources.Load<VisualTreeAsset>(UxmlPath);
         m_VisualTreeAsset.CloneTree(this);
     }
 
