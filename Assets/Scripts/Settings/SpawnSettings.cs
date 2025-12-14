@@ -7,6 +7,6 @@ public class SpawnSettings
 
     [Tooltip("starting spawn rate per second")]
     public float startSpawnRate = 0.5f;
-    [Tooltip("how much the spawn rate increases each spawn by percentage")]
-    public float spawnIncreaseRate = 2f;
+    [Tooltip("how much the spawn rate increases each second")]
+    public float spawnRateIncrease = 0.2f;
 }

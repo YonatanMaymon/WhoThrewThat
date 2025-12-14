@@ -9,12 +9,13 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] origamiPrefabs;
     public GameObject scissorsPrefab;
     public SpawnSettings spawnSettings;
-    private Coroutine spawnLoop;
     private float SPAWN_HIGHT_OFFSET = 1.3f;
+    private float spawnRate;
     private bool spawnLoopRunning = false;
 
     void Start()
     {
+        spawnRate = spawnSettings.startSpawnRate;
         StartSpawnLoop();
         GameManager.onGameOver += StopSpawnLoop;
     }
@@ -42,28 +43,31 @@ public class SpawnManager : MonoBehaviour
     void StartSpawnLoop()
     {
         spawnLoopRunning = true;
-        spawnLoop = StartCoroutine(SpawnLoopCoroutine());
+        StartCoroutine(SpawnLoopCoroutine());
+        StartCoroutine(SpawnIncreaseLoopCoroutine());
     }
 
     void StopSpawnLoop()
     {
         spawnLoopRunning = false;
-        if (spawnLoop != null)
-            StopCoroutine(spawnLoop);
     }
 
     IEnumerator SpawnLoopCoroutine()
     {
-        float spawnRate = spawnSettings.startSpawnRate;
         while (spawnLoopRunning)
         {
             Spawn();
             float spawnInterval = 1 / spawnRate;
             yield return new WaitForSeconds(spawnInterval);
-            // adjust spawnRate based on spawnIncreaseRate
-            float exponentialSpawnLimiter = (float)Mathf.Pow(2, spawnRate);
-            float spawnRateModerator = spawnSettings.spawnIncreaseRate / (100f * exponentialSpawnLimiter) + 1f;
-            spawnRate *= spawnRateModerator;
+        }
+    }
+    IEnumerator SpawnIncreaseLoopCoroutine()
+    {
+        while (spawnLoopRunning)
+        {
+            spawnRate += spawnSettings.spawnRateIncrease / (2 * spawnRate);
+            Debug.Log(spawnRate);
+            yield return new WaitForSeconds(1);
         }
     }
 
