@@ -10,19 +10,17 @@ public class SpawnManager : MonoBehaviour
     public GameObject scissorsPrefab;
     public SpawnSettings spawnSettings;
     private float SPAWN_HIGHT_OFFSET = 1.3f;
-    private float spawnRate;
     private bool spawnLoopRunning = false;
 
     void Start()
     {
-        spawnRate = spawnSettings.startSpawnRate;
         StartSpawnLoop();
         GameManager.onGameOver += StopSpawnLoop;
     }
 
     void Spawn()
     {
-        bool isScissors = spawnSettings.scissorsSpawnPercent >= Random.Range(0f, 100f);
+        bool isScissors = spawnSettings.scissorsChance >= Random.Range(0f, 1f);
 
         Vector3 position = VectorUtils.GenerateRandomSpawnPointAboveScreen(SPAWN_HIGHT_OFFSET);
         GameObject unit = isScissors ? SpawnScissors(position) : SpawnOrigami(position);
@@ -44,7 +42,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawnLoopRunning = true;
         StartCoroutine(SpawnLoopCoroutine());
-        StartCoroutine(SpawnIncreaseLoopCoroutine());
+        StartCoroutine(DeficultyIncreaseCoroutine());
     }
 
     void StopSpawnLoop()
@@ -57,15 +55,19 @@ public class SpawnManager : MonoBehaviour
         while (spawnLoopRunning)
         {
             Spawn();
-            float spawnInterval = 1 / spawnRate;
+            float spawnInterval = 1 / spawnSettings.spawnRate;
+            Debug.Log("Spawn Interval: " + spawnInterval);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-    IEnumerator SpawnIncreaseLoopCoroutine()
+    IEnumerator DeficultyIncreaseCoroutine()
     {
         while (spawnLoopRunning)
         {
-            spawnRate += spawnSettings.spawnRateIncrease / (2 * spawnRate);
+            // Increase spawn rate and scissors chance over time
+            spawnSettings.spawnRate += spawnSettings.spawnRateIncrease / spawnSettings.spawnRate;
+            spawnSettings.scissorsChance += (1 / spawnSettings.scissorsChance - 1) * spawnSettings.scissorsChanceIncrease;
+            Debug.Log("scissorsChance: " + spawnSettings.scissorsChance);
             yield return new WaitForSeconds(1);
         }
     }
