@@ -8,7 +8,7 @@ public class GameUI : MonoBehaviour
 {
     private int _score = 0;
     VisualElement root, gameOverUIContainer;
-    Label updatingScoreLabel, finalScoreLabel, coinAmountLabel;
+    Label updatingScoreLabel, ComboLabel, finalScoreLabel, coinAmountLabel;
     Button restartButton, menuButton;
 
     private void Awake()
@@ -37,6 +37,7 @@ public class GameUI : MonoBehaviour
         root = GetComponent<UIDocument>().rootVisualElement;
         gameOverUIContainer = root.Q<VisualElement>(GameOverUIContainerName);
         updatingScoreLabel = root.Q<Label>(UpdatingScoreName);
+        ComboLabel = root.Q<Label>(ComboLabelName);
         finalScoreLabel = root.Q<Label>(FinalScoreName);
         coinAmountLabel = root.Q<Label>(CoinAmountName);
         restartButton = root.Q<Button>(RestartButtonName);
@@ -47,10 +48,11 @@ public class GameUI : MonoBehaviour
 
     }
 
-    private void OnScoreUpdate(int score)
+    private void OnScoreUpdate(int score, int combo)
     {
         _score = score;
         updatingScoreLabel.text = "Score: " + score;
+        ComboLabel.text = combo == 0 ? "" : "X" + combo;
     }
 
     private void OnMenuClick()

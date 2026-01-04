@@ -26,6 +26,7 @@ public static class UIConsts
     {
         public const string
         UpdatingScoreName = "UpdatingScore",
+        ComboLabelName = "Combo",
         FinalScoreName = "FinalScore",
         CoinAmountName = "CoinAmount",
         GameOverUIContainerName = "GameOverUIContainer",

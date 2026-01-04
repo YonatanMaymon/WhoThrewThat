@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DroppingObject : MonoBehaviour
@@ -12,6 +13,11 @@ public class DroppingObject : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Ground"))
-            Destroy(gameObject);
+            FallOnGround();
+    }
+
+    protected virtual void FallOnGround()
+    {
+        Destroy(gameObject);
     }
 }

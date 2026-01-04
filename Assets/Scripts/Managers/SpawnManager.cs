@@ -66,7 +66,6 @@ public class SpawnManager : MonoBehaviour
         while (spawnLoopRunning)
         {
             spawnRate += spawnSettings.spawnRateIncrease / (2 * spawnRate);
-            Debug.Log(spawnRate);
             yield return new WaitForSeconds(1);
         }
     }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2054823867770912143}
   - component: {fileID: 3190764085220994241}
   - component: {fileID: 6612524616897582841}
-  - component: {fileID: 2536051119163738512}
   - component: {fileID: -4586740804915437171}
   - component: {fileID: 5430185184960069107}
   m_Layer: 0
@@ -72,19 +71,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2536051119163738512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5628116459989052173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91dfe298314b39428408140f6525077, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DestroyOutBounds
-  torqueStrength: 2
 --- !u!114 &-4586740804915437171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1799df27f64ba9e4c889f497080853fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Origami
+  torqueStrength: 2
   score: 5
 --- !u!65 &5430185184960069107
 BoxCollider:

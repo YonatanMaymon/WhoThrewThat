@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4586740804915437171, guid: bcfc5ad6acdbf2a4a8872ca10c16b000, type: 3}
+      propertyPath: torqueStrength
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2054823867770912143, guid: bcfc5ad6acdbf2a4a8872ca10c16b000, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -80,7 +84,8 @@ PrefabInstance:
       propertyPath: m_CenterOfMass.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2536051119163738512, guid: bcfc5ad6acdbf2a4a8872ca10c16b000, type: 3}
     m_RemovedGameObjects:
     - {fileID: 392299775423895492, guid: bcfc5ad6acdbf2a4a8872ca10c16b000, type: 3}
     m_AddedGameObjects:
