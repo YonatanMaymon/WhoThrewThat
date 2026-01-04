@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 
 public class PlayerController : MonoBehaviour, IBeginDragHandler, IDragHandler
@@ -18,8 +17,8 @@ public class PlayerController : MonoBehaviour, IBeginDragHandler, IDragHandler
     void Start()
     {
         Rb = GetComponent<Rigidbody>();
-        force = baseForce * GameManager.instance.statsEffectivenessModerator[Enums.STATS.STRENGTH];
-        gripTime = baseGripTime * GameManager.instance.statsEffectivenessModerator[Enums.STATS.GRIP];
+        force = baseForce * MainManager.instance.statsEffectivenessModerator[Enums.STATS.STRENGTH];
+        gripTime = baseGripTime * MainManager.instance.statsEffectivenessModerator[Enums.STATS.GRIP];
     }
 
     private void Update()
@@ -29,7 +28,7 @@ public class PlayerController : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     private void KeepOnScreen()
     {
-        float offsetX = Screen.width * GameManager.ScreenBufferX;
+        float offsetX = Screen.width * MainManager.ScreenBufferX;
         Vector3 leftDown = VectorUtils.GetWorldSpacePos(offsetX, 0);
         Vector3 rightDown = VectorUtils.GetWorldSpacePos(Screen.width - offsetX, 0);
         Vector3 up = VectorUtils.GetWorldSpacePos(Screen.width / 2, Screen.height);

@@ -19,7 +19,7 @@ public static class VectorUtils
 
     public static Vector3 GenerateRandomSpawnPointAboveScreen(float hightOffset)
     {
-        float widthOffset = GameManager.ScreenBufferX;
+        float widthOffset = MainManager.ScreenBufferX;
         float xSpawnScreenVal = Random.Range(widthOffset, Screen.width * (1 - widthOffset));
         Vector3 spawnPos = GetWorldSpacePos(xSpawnScreenVal, Screen.height * hightOffset);
         return spawnPos;

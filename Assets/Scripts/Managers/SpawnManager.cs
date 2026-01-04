@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartSpawnLoop();
-        GameManager.onGameOver += StopSpawnLoop;
+        MainManager.onGameOver += StopSpawnLoop;
     }
 
     void Spawn()
@@ -75,6 +75,6 @@ public class SpawnManager : MonoBehaviour
     void OnDisable()
     {
         StopSpawnLoop();
-        GameManager.onGameOver -= StopSpawnLoop;
+        MainManager.onGameOver -= StopSpawnLoop;
     }
 }

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class MainManager : MonoBehaviour
 {
-    public static GameManager instance { get; private set; }
+    public static MainManager instance { get; private set; }
     public static event Action onGameOver;
     public static float ScreenBufferX = 0.05f;
     public Dictionary<Enums.STATS, float> statsEffectivenessModerator { get; private set; } = new();
+    // Progress from 0 to 1 (0% to 100%) used for conytrolling difficulty increase, music, etc.
+    public float progress = 0f;
 
-    public float gravityModerator = 1f;
     private void Awake()
     {
         if (instance != null)
@@ -27,10 +28,6 @@ public class GameManager : MonoBehaviour
         PlayerController.onScissorsCatch += OnGameOver;
     }
 
-    void Start()
-    {
-        Physics.gravity *= gravityModerator;
-    }
 
     public void UpdateStatsEffectiveness()
     {

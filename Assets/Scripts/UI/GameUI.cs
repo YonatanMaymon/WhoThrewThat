@@ -19,7 +19,7 @@ public class GameUI : MonoBehaviour
     private void OnEnable()
     {
         ScoreManager.onScoreUpdate += OnScoreUpdate;
-        GameManager.onGameOver += OnGameOver;
+        MainManager.onGameOver += OnGameOver;
         restartButton.clicked += OnRestartClick;
         menuButton.clicked += OnMenuClick;
     }
@@ -69,7 +69,7 @@ public class GameUI : MonoBehaviour
     private void OnDisable()
     {
         ScoreManager.onScoreUpdate -= OnScoreUpdate;
-        GameManager.onGameOver -= OnGameOver;
+        MainManager.onGameOver -= OnGameOver;
         restartButton.clicked -= OnRestartClick;
         menuButton.clicked -= OnMenuClick;
     }

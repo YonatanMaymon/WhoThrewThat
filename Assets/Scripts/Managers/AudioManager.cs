@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
         GeneralUI.onButtonClick += OnButtonClicked;
         SpawnManager.onScissorsSpawn += OnScissorsSpawn;
         PlayerController.onOrigamiCatch += OnOrigamiCatch;
-        GameManager.onGameOver += OnGameOver;
+        MainManager.onGameOver += OnGameOver;
     }
 
     void Start()
@@ -121,6 +121,6 @@ public class AudioManager : MonoBehaviour
         GeneralUI.onButtonClick -= OnButtonClicked;
         SpawnManager.onScissorsSpawn -= OnScissorsSpawn;
         PlayerController.onOrigamiCatch -= OnOrigamiCatch;
-        GameManager.onGameOver -= OnGameOver;
+        MainManager.onGameOver -= OnGameOver;
     }
 }

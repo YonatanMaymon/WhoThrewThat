@@ -17,15 +17,15 @@ public class ScoreManager : MonoBehaviour
     {
         PlayerController.onOrigamiCatch += AddScore;
         Origami.onFallOnGround += ResetCombo;
-        GameManager.onGameOver += OnGameOver;
+        MainManager.onGameOver += OnGameOver;
     }
 
     private void OnGameOver()
     {
-        GameManager gameManager = GameManager.instance;
+        MainManager mainManager = MainManager.instance;
 
-        float coinPerScore = gameManager != null ?
-            baseCoinPerScore * gameManager.statsEffectivenessModerator[Enums.STATS.COIN_GAIN]
+        float coinPerScore = mainManager != null ?
+            baseCoinPerScore * mainManager.statsEffectivenessModerator[Enums.STATS.COIN_GAIN]
             :
             baseCoinPerScore;
         int coinsGained = (int)(_score * coinPerScore);
@@ -54,6 +54,6 @@ public class ScoreManager : MonoBehaviour
     {
         PlayerController.onOrigamiCatch -= AddScore;
         Origami.onFallOnGround -= ResetCombo;
-        GameManager.onGameOver -= OnGameOver;
+        MainManager.onGameOver -= OnGameOver;
     }
 }

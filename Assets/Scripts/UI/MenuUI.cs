@@ -85,7 +85,7 @@ public class MenuUI : MonoBehaviour
 
     private void OnExitClick()
     {
-        GameManager.instance.ExitGame();
+        MainManager.instance.ExitGame();
     }
 
     private IEnumerator DelayedShowMenu(float sec)
