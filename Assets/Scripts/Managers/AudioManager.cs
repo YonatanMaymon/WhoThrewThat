@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public AudioManager instance;
     public AudioClip[] gameMusic;
     public AudioClip menuMusic, gameOverAudio, OrigamiCatchAudio, ScissorsSpawnAudio, buttonClick;
+    public float maxMusicPitch = 2f;
     public AudioSettings audioSettings;
     private AudioSource musicSource, collectAudioSource, scissorsAudioSource, UIAudioSource;
     private Coroutine musicCoroutine;
@@ -28,6 +29,7 @@ public class AudioManager : MonoBehaviour
         SpawnManager.onScissorsSpawn += OnScissorsSpawn;
         PlayerController.onOrigamiCatch += OnOrigamiCatch;
         MainManager.onGameOver += OnGameOver;
+        ProgressionManager.onProgressUpdate += OnProgressUpdate;
     }
 
     void Start()
@@ -47,6 +49,10 @@ public class AudioManager : MonoBehaviour
     {
         UIAudioSource.resource = buttonClick;
         UIAudioSource.Play();
+    }
+    private void OnProgressUpdate()
+    {
+        musicSource.pitch = ProgressionManager.ProgressionAdjustor(1f, maxMusicPitch);
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)

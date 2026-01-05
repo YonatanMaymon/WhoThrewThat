@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProgressionManager : MonoBehaviour
 {
+    public static event Action onProgressUpdate;
     private static ProgressionManager instance;
     // Progress from 0 to 1 (0% to 100%) used for controlling difficulty increase, music, etc.
     private static float progress = 0f;
@@ -32,7 +33,6 @@ public class ProgressionManager : MonoBehaviour
     private void OnGameOver()
     {
         gamePlaying = false;
-        progress = 0f;
     }
 
     IEnumerator ProgressCoroutine()
@@ -42,8 +42,12 @@ public class ProgressionManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             progress += PROGRESSION_INCREASE_RATE;
             progress = Mathf.Clamp01(progress);
+            onProgressUpdate?.Invoke();
         }
+        progress = 0f;
+        onProgressUpdate?.Invoke();
     }
+
     /// <summary>
     /// Returns a value adjusted by the progression factor
     /// </summary>
