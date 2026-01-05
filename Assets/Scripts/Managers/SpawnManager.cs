@@ -10,18 +10,23 @@ public class SpawnManager : MonoBehaviour
     public GameObject scissorsPrefab;
     public SpawnSettings spawnSettings;
     private float SPAWN_HIGHT_OFFSET = 1.3f;
-    private bool spawnLoopRunning = false;
 
+    private bool gamePlaying = true;
+    private void OnEnable()
+    {
+        MainManager.onGameOver += () => { gamePlaying = false; };
+    }
     void Start()
     {
-        StartSpawnLoop();
-        MainManager.onGameOver += StopSpawnLoop;
+        StartCoroutine(SpawnLoopCoroutine());
     }
 
     void Spawn()
     {
-        bool isScissors = spawnSettings.scissorsChance >= Random.Range(0f, 1f);
-
+        float scissorsSpawnChance =
+            ProgressionManager.ProgressionAdjustor(spawnSettings.scissorsChance, spawnSettings.maxScissorsChance);
+        bool isScissors = scissorsSpawnChance >= Random.Range(0f, 1f);
+        Debug.Log(scissorsSpawnChance);
         Vector3 position = VectorUtils.GenerateRandomSpawnPointAboveScreen(SPAWN_HIGHT_OFFSET);
         GameObject unit = isScissors ? SpawnScissors(position) : SpawnOrigami(position);
     }
@@ -38,43 +43,16 @@ public class SpawnManager : MonoBehaviour
         return Instantiate(origamiPrefab, position, origamiPrefab.transform.rotation);
     }
 
-    void StartSpawnLoop()
-    {
-        spawnLoopRunning = true;
-        StartCoroutine(SpawnLoopCoroutine());
-        StartCoroutine(DeficultyIncreaseCoroutine());
-    }
-
-    void StopSpawnLoop()
-    {
-        spawnLoopRunning = false;
-    }
-
     IEnumerator SpawnLoopCoroutine()
     {
-        while (spawnLoopRunning)
+        while (gamePlaying)
         {
             Spawn();
-            float spawnInterval = 1 / spawnSettings.spawnRate;
+            float spawnRate =
+                ProgressionManager.ProgressionAdjustor(spawnSettings.spawnRate, spawnSettings.maxSpawnRate);
+            float spawnInterval = 1 / spawnRate;
             Debug.Log("Spawn Interval: " + spawnInterval);
             yield return new WaitForSeconds(spawnInterval);
         }
-    }
-    IEnumerator DeficultyIncreaseCoroutine()
-    {
-        while (spawnLoopRunning)
-        {
-            // Increase spawn rate and scissors chance over time
-            spawnSettings.spawnRate += spawnSettings.spawnRateIncrease / spawnSettings.spawnRate;
-            spawnSettings.scissorsChance += (1 / spawnSettings.scissorsChance - 1) * spawnSettings.scissorsChanceIncrease;
-            Debug.Log("scissorsChance: " + spawnSettings.scissorsChance);
-            yield return new WaitForSeconds(1);
-        }
-    }
-
-    void OnDisable()
-    {
-        StopSpawnLoop();
-        MainManager.onGameOver -= StopSpawnLoop;
     }
 }

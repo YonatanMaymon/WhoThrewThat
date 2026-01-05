@@ -498,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cb7cdb088c911469ab998c3d898cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  instance: {fileID: 0}
   gameMusic:
   - {fileID: 8300000, guid: fc5af015011ea3745b7f78ea1dd1049f, type: 3}
   - {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
@@ -616,7 +617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415934377}
-  - component: {fileID: 1415934376}
+  - component: {fileID: 1415934378}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -624,19 +625,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1415934376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415934375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae60cd87255816a429289d0ea3015752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  gravityModerator: 1
 --- !u!4 &1415934377
 Transform:
   m_ObjectHideFlags: 0
@@ -652,6 +640,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1415934378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415934375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae60cd87255816a429289d0ea3015752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1 &1423672345
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b32562fa75290f4d9a39190c5545181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
-  coinsGained: 0
 --- !u!4 &1468945710
 Transform:
   m_ObjectHideFlags: 0

@@ -66,5 +66,8 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "WhoThrewThat.sln"
+    "dotnet.defaultSolution": "WhoThrewThat.sln",
+    "cSpell.words": [
+        "Mathf"
+    ]
 }

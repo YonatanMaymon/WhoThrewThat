@@ -9,8 +9,6 @@ public class MainManager : MonoBehaviour
     public static event Action onGameOver;
     public static float ScreenBufferX = 0.05f;
     public Dictionary<Enums.STATS, float> statsEffectivenessModerator { get; private set; } = new();
-    // Progress from 0 to 1 (0% to 100%) used for conytrolling difficulty increase, music, etc.
-    public float progress = 0f;
 
     private void Awake()
     {
